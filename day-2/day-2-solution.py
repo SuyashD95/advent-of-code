@@ -8,8 +8,6 @@ Part 1 (Pending):
     according to your strategy guide?
     Answer:
 """
-from _typeshed import ReadOnlyBuffer
-
 
 LOSS_PTS = 0
 DRAW_PTS = 3
@@ -36,6 +34,66 @@ SCORING_SYSTEM = {
         "Scissors": SCISSORS_PTS + DRAW_PTS
     }
 }
+
+
+def _left_column_decoder(guide_char: str):
+    """Return the string describing the object that was represented
+    by the given character.
+
+    Mappings:
+        A -> Rock
+        B -> Paper
+        C -> Scissors
+
+    Parameters
+    ----------
+    guide_char: The character present in the right hand column of puzzle input.
+
+    Raises
+    ------
+    ValueError: Invalid value was provided.
+    """
+    if guide_char == "A":
+        return "Rock"
+    elif guide_char == "B":
+        return "Paper"
+    elif guide_char == "C":
+        return "Scissors"
+    else:
+        raise ValueError(
+            "Invalid `guide_char` value was passed. Valid values are 'A', "
+            "'B' & 'C'."
+        )
+
+
+def _right_column_decoder(guide_char: str):
+    """Return the string describing the object that was represented
+    by the given character.
+
+    Mappings:
+        X -> Rock
+        Y -> Paper
+        Z -> Scissors
+
+    Parameters
+    ----------
+    guide_char: The character present in the right hand column of puzzle input.
+
+    Raises
+    ------
+    ValueError: Invalid value was provided.
+    """
+    if guide_char == "X":
+        return "Rock"
+    elif guide_char == "Y":
+        return "Paper"
+    elif guide_char == "Z":
+        return "Scissors"
+    else:
+        raise ValueError(
+            "Invalid `guide_char` value was given. Valid values are 'X', "
+            "'Y' & 'Z'."
+        )
 
 
 def part_1_solution(puzzle_input_filename: str) -> int:

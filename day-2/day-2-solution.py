@@ -96,12 +96,29 @@ def _right_column_decoder(guide_char: str):
         )
 
 
-def part_1_solution(puzzle_input_filename: str) -> int:
-    """Return the answer to the question asked in 1st puzzle based
-    on the given input.
+def calculate_guide_total_score(puzzle_input_filename: str) -> int:
+    """Returns the total score based on the set of inputs provided in
+    the provided file, according to the rules of the game.
+
+    Parameters
+    ----------
+    puzzle_input_filename: Name of the file containing puzzle's input dataset.
     """
-    return 0
+    total_score = 0
+
+    with open(puzzle_input_filename) as puzzle_file:
+        while file_line := puzzle_file.readline():
+            left_col_char, right_col_char = file_line.split()
+            left_game_obj = _left_column_decoder(left_col_char)
+            right_game_obj = _right_column_decoder(right_col_char)
+            round_score = SCORING_SYSTEM[left_game_obj][right_game_obj]
+            total_score += round_score
+
+    return total_score
 
 
 if __name__ == "__main__":
-    print(f"Day 2 (Part 1) Answer: {part_1_solution('day-2-input.txt')}")
+    print(
+        "Day 2 (Part 1) Answer: "
+        f"{calculate_guide_total_score('day-2-input.txt')}"
+    )

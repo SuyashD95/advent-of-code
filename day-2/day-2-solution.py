@@ -71,6 +71,7 @@ def _opponent_column_decoder(guide_char: str):
             "'B' & 'C'."
         )
 
+
 # -------------------------- PART 1 SOLUTION -----------------------------
 def _player_column_decoder(guide_char: str):
     """Return the string describing the object that was represented
@@ -121,9 +122,29 @@ def calculate_guide_total_score(puzzle_input_filename: str) -> int:
             total_score += round_score
 
     return total_score
+# ------------------------------------------------------------------------
+
+
+# -------------------------- PART 2 SOLUTION -----------------------------
+def find_guide_total_score(puzzle_input_filename: str) -> int:
+    """Returns the total score based on the set of inputs provided in
+    the provided file, according to the rules of the game.
+
+    Parameters
+    ----------
+    puzzle_input_filename: Name of the file containing puzzle's input dataset.
+    """
+    total_score = 0
+
+    with open(puzzle_input_filename) as puzzle_file:
+        pass
+
+    return total_score
+# ------------------------------------------------------------------------
 
 
 if __name__ == "__main__":
     puzzle_input_filename = "day-2-input.txt"
     print("Day 2 Answers:")
     print(f"\tPart 1: {calculate_guide_total_score(puzzle_input_filename)}")
+    print(f"\tPart 2: {find_guide_total_score(puzzle_input_filename)}")

@@ -3,9 +3,15 @@ Advent of Code 2022
 -------------------
 Day 2: Rock Paper Scissors
 
-Part 1 (Pending):
+Part 1 (Completed):
     Question: What would your total score be if everything goes exactly
     according to your strategy guide?
+    Answer: 10941
+
+Part 2 (Pending):
+    Question: What would your total score be if everything goes exactly
+    according to your strategy guide (following the correction made for
+    decoding the second column)?
     Answer:
 """
 
@@ -36,7 +42,7 @@ SCORING_SYSTEM = {
 }
 
 
-def _left_column_decoder(guide_char: str):
+def _opponent_column_decoder(guide_char: str):
     """Return the string describing the object that was represented
     by the given character.
 
@@ -65,8 +71,8 @@ def _left_column_decoder(guide_char: str):
             "'B' & 'C'."
         )
 
-
-def _right_column_decoder(guide_char: str):
+# -------------------------- PART 1 SOLUTION -----------------------------
+def _player_column_decoder(guide_char: str):
     """Return the string describing the object that was represented
     by the given character.
 
@@ -109,16 +115,15 @@ def calculate_guide_total_score(puzzle_input_filename: str) -> int:
     with open(puzzle_input_filename) as puzzle_file:
         while file_line := puzzle_file.readline():
             left_col_char, right_col_char = file_line.split()
-            left_game_obj = _left_column_decoder(left_col_char)
-            right_game_obj = _right_column_decoder(right_col_char)
-            round_score = SCORING_SYSTEM[left_game_obj][right_game_obj]
+            opponent_game_obj = _opponent_column_decoder(left_col_char)
+            player_game_obj = _player_column_decoder(right_col_char)
+            round_score = SCORING_SYSTEM[player_game_obj][opponent_game_obj]
             total_score += round_score
 
     return total_score
 
 
 if __name__ == "__main__":
-    print(
-        "Day 2 (Part 1) Answer: "
-        f"{calculate_guide_total_score('day-2-input.txt')}"
-    )
+    puzzle_input_filename = "day-2-input.txt"
+    print("Day 2 Answers:")
+    print(f"\tPart 1: {calculate_guide_total_score(puzzle_input_filename)}")

@@ -126,6 +126,25 @@ def calculate_guide_total_score(puzzle_input_filename: str) -> int:
 
 
 # -------------------------- PART 2 SOLUTION -----------------------------
+RESULT_MATRIX = {
+    "Rock": {
+        "Win": "Paper",
+        "Draw": "Rock",
+        "Loss": "Scissors"
+    },
+    "Paper": {
+        "Win": "Scissors",
+        "Draw": "Paper",
+        "Loss": "Rock"
+    },
+    "Scissors": {
+        "Win": "Rock",
+        "Draw": "Scissors",
+        "Loss": "Paper"
+    }
+}
+
+
 def _result_char_decoder(result_char: str, opponent_game_obj: str) -> str:
     """Returns the string representing the game object that will satisfy
     the expected result of a round.

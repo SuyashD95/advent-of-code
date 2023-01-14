@@ -42,37 +42,6 @@ SCORING_SYSTEM = {
 }
 
 
-def _opponent_column_decoder(guide_char: str):
-    """Return the string describing the object that was represented
-    by the given character.
-
-    Mappings:
-        A -> Rock
-        B -> Paper
-        C -> Scissors
-
-    Parameters
-    ----------
-    guide_char: The character present in the right hand column of puzzle input.
-
-    Raises
-    ------
-    ValueError: Invalid value was provided.
-    """
-    if guide_char == "A":
-        return "Rock"
-    elif guide_char == "B":
-        return "Paper"
-    elif guide_char == "C":
-        return "Scissors"
-    else:
-        raise ValueError(
-            "Invalid `guide_char` value was passed. Valid values are 'A', "
-            "'B' & 'C'."
-        )
-
-
-# -------------------------- PART 1 SOLUTION -----------------------------
 def _player_column_decoder(guide_char: str):
     """Return the string describing the object that was represented
     by the given character.
@@ -103,6 +72,37 @@ def _player_column_decoder(guide_char: str):
         )
 
 
+# -------------------------- PART 1 SOLUTION -----------------------------
+def _opponent_column_decoder(guide_char: str):
+    """Return the string describing the object that was represented
+    by the given character.
+
+    Mappings:
+        A -> Rock
+        B -> Paper
+        C -> Scissors
+
+    Parameters
+    ----------
+    guide_char: The character present in the right hand column of puzzle input.
+
+    Raises
+    ------
+    ValueError: Invalid value was provided.
+    """
+    if guide_char == "A":
+        return "Rock"
+    elif guide_char == "B":
+        return "Paper"
+    elif guide_char == "C":
+        return "Scissors"
+    else:
+        raise ValueError(
+            "Invalid `guide_char` value was passed. Valid values are 'A', "
+            "'B' & 'C'."
+        )
+
+
 def calculate_guide_total_score(puzzle_input_filename: str) -> int:
     """Returns the total score based on the set of inputs provided in
     the provided file, according to the rules of the game.
@@ -126,6 +126,44 @@ def calculate_guide_total_score(puzzle_input_filename: str) -> int:
 
 
 # -------------------------- PART 2 SOLUTION -----------------------------
+def _result_char_decoder(result_char: str, opponent_game_obj: str) -> str:
+    """Returns the string representing the game object that will satisfy
+    the expected result of a round.
+
+    Mappings:
+        X -> Loss
+        Y -> Draw
+        Z -> Win
+
+    Parameters
+    ----------
+    result_char: Expected result of the draw.
+    opponent_game_obj: String representation of game object ("Rock", "Paper"
+    and "Scissors").
+
+    Raises
+    ------
+    ValueError: Invalid value was provided.
+    """
+    if opponent_game_obj not in ["Rock", "Paper", "Scissors"]:
+        raise ValueError(
+            "Invalid value for `opponent_game_obj` was given. Valid values are"
+            "'Rock', 'Paper' and 'Scissors'."
+        )
+
+    if result_char == "X":
+        pass
+    elif result_char == "Y":
+        pass
+    elif result_char == "Z":
+        pass
+    else:
+        raise ValueError(
+            "Invalid value for `result_char` was given. Valid values are "
+            "'X', 'Y' and 'Z'."
+        )
+
+
 def find_guide_total_score(puzzle_input_filename: str) -> int:
     """Returns the total score based on the set of inputs provided in
     the provided file, according to the rules of the game.

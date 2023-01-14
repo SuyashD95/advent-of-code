@@ -147,7 +147,8 @@ RESULT_MATRIX = {
 
 def _result_char_decoder(result_char: str, opponent_game_obj: str) -> str:
     """Returns the string representing the game object that will satisfy
-    the expected result of a round.
+    the expected result of a round. It could be either "Rock", "Paper" or
+    "Scissors".
 
     Mappings:
         X -> Loss
@@ -171,11 +172,11 @@ def _result_char_decoder(result_char: str, opponent_game_obj: str) -> str:
         )
 
     if result_char == "X":
-        pass
+        return RESULT_MATRIX[opponent_game_obj]["Loss"]
     elif result_char == "Y":
-        pass
+        return RESULT_MATRIX[opponent_game_obj]["Draw"]
     elif result_char == "Z":
-        pass
+        return RESULT_MATRIX[opponent_game_obj]["Win"]
     else:
         raise ValueError(
             "Invalid value for `result_char` was given. Valid values are "

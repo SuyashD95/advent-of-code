@@ -1,18 +1,22 @@
 """
 Advent of Code 2022
 -------------------
-Day 2: Rock Paper Scissors
+Day 2: Rock Paper Scissors (Finished)
 
 Part 1 (Completed):
     Question: What would your total score be if everything goes exactly
     according to your strategy guide?
     Answer: 10941
 
-Part 2 (Pending):
+Part 2 (Completed):
     Question: What would your total score be if everything goes exactly
     according to your strategy guide (following the correction made for
     decoding the second column)?
-    Answer:
+    Answer: 13071
+-------------------
+
+Author: Suyash Dayal
+Originally Completed On: 14th January 2023
 """
 
 LOSS_PTS = 0
@@ -195,7 +199,12 @@ def find_guide_total_score(puzzle_input_filename: str) -> int:
     total_score = 0
 
     with open(puzzle_input_filename) as puzzle_file:
-        pass
+        while file_line := puzzle_file.readline():
+            left_col_char, right_col_char = file_line.split()
+            opponent_game_obj = _opponent_column_decoder(left_col_char)
+            player_game_obj = _result_char_decoder(right_col_char, opponent_game_obj)
+            round_score = SCORING_SYSTEM[player_game_obj][opponent_game_obj]
+            total_score += round_score
 
     return total_score
 # ------------------------------------------------------------------------

@@ -8,6 +8,12 @@ Part 1 (Pending):
     rucksack. What is the sum of priorities of those item types?
     Answer:
 """
+from string import ascii_letters
+
+ITEM_PRIORITY_MAP = {
+    letter: index + 1
+    for index, letter in enumerate(ascii_letters)
+}
 
 
 def common_items_total_priority(puzzle_input_filename: str) -> int:

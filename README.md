@@ -9,3 +9,4 @@ Thank you [@Eric Wastl](https://adventofcode.com/about) for designing and sharin
 
 **Day 2: Rock Paper Scissors** [[Puzzle](https://adventofcode.com/2022/day/2)] [[Input File](/day-2/day-2-input.txt)] [[Solution](/day-2/day-2-solution.py)]
 
+**Day 3: Rucksack Reorganization** [[Puzzle](https://adventofcode.com/2022/day/3)] [[Input File](/day-3/day-3-input.txt)] [[Solution](/day-3/day-3-solution.py)]

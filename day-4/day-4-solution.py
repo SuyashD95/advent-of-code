@@ -13,27 +13,27 @@ Part 2 (Pending):
 """
 
 
-# ========================== PART ONE SOLUTION ===========================
+# -------------------------- PART ONE SOLUTION ---------------------------
 def is_one_range_subset_of_another_range(
-        first_pair: tuple[int, int],
-        second_pair: tuple[int, int]
+        first_num_range: tuple[int, int],
+        second_num_range: tuple[int, int]
         ) -> bool:
     """Returns True if the range of numbers represented by the one pair is a subset
     of the range numbers represented by the another pair.
     """
-    first_pair_low_bound = first_pair[0]
-    first_pair_high_bound = first_pair[1]
-    second_pair_low_bound = second_pair[0]
-    second_pair_high_bound = second_pair[1]
+    first_range_min_num = first_num_range[0]
+    first_range_max_num = first_num_range[1]
+    second_range_min_num = second_num_range[0]
+    second_range_max_num = second_num_range[1]
 
     if (
-        first_pair_low_bound >= second_pair_low_bound
-        and first_pair_high_bound <= second_pair_high_bound
+        first_range_min_num >= second_range_min_num
+        and first_range_max_num <= second_range_max_num
     ):
         return True
     elif (
-        second_pair_low_bound >= first_pair_low_bound
-        and second_pair_high_bound <= first_pair_high_bound
+        second_range_min_num >= first_range_min_num
+        and second_range_max_num <= first_range_max_num
     ):
         return True
     return False
@@ -51,14 +51,22 @@ def subset_assignment_pairs_count(puzzle_input_filename: str) -> int:
     with open(puzzle_input_filename) as input_file:
         while pair_line := input_file.readline()[:-1]:
             first_section, second_section = pair_line.split(",")
-            first_pair = first_section.split("-")
-            first_pair = (int(first_pair[0]), int(first_pair[1]),)
-            second_pair = second_section.split("-")
-            second_pair = (int(second_pair[0]), int(second_pair[1]),)
-            if is_one_range_subset_of_another_range(first_pair, second_pair):
+            first_num_range = first_section.split("-")
+            first_num_range = (
+                int(first_num_range[0]),
+                int(first_num_range[1]),
+            )
+            second_num_range = second_section.split("-")
+            second_num_range = (
+                int(second_num_range[0]),
+                int(second_num_range[1]),
+            )
+            if is_one_range_subset_of_another_range(
+                first_num_range, second_num_range
+            ):
                 count += 1
     return count
-# ========================================================================
+# ------------------------------------------------------------------------
 
 
 # -------------------------- PART TWO SOLUTION ===========================
@@ -75,10 +83,16 @@ def count_overlapping_ranges(puzzle_input_filename: str) -> int:
     with open(puzzle_input_filename) as input_file:
         while pair_line := input_file.readline()[:-1]:
             first_section, second_section = pair_line.split(",")
-            first_pair = first_section.split("-")
-            first_pair = (int(first_pair[0]), int(first_pair[1]),)
-            second_pair = second_section.split("-")
-            second_pair = (int(second_pair[0]), int(second_pair[1]),)
+            first_num_range = first_section.split("-")
+            first_num_range = (
+                int(first_num_range[0]),
+                int(first_num_range[1]),
+            )
+            second_num_range = second_section.split("-")
+            second_num_range = (
+                int(second_num_range[0]),
+                int(second_num_range[1]),
+            )
     return count
 # ========================================================================
 

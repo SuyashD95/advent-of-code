@@ -1,10 +1,14 @@
 """
 Advent of Code 2022
 -------------------
-Day 4: Camp Cleanup (Pending)
+Day 4: Camp Cleanup (Part 1 Finished)
 
-Part 1 (Pending):
+Part 1 (Completed):
     Question: In how many assignment pairs does one range fully contain the other?
+    Answer: 456
+
+Part 2 (Pending):
+    Question: In how many assignment pairs do the ranges overlap?
     Answer:
 """
 

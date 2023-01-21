@@ -61,6 +61,28 @@ def subset_assignment_pairs_count(puzzle_input_filename: str) -> int:
 # ========================================================================
 
 
+# -------------------------- PART TWO SOLUTION ===========================
+def count_overlapping_ranges(puzzle_input_filename: str) -> int:
+    """Returns the count of pairs where the two given number ranges overlap
+    with one another i.e., some of the numbers between the two ranges are
+    the same.
+
+    Parameters
+    ----------
+    puzzle_input_filename: Name of the file containing input dataset.
+    """
+    count = 0
+    with open(puzzle_input_filename) as input_file:
+        while pair_line := input_file.readline()[:-1]:
+            first_section, second_section = pair_line.split(",")
+            first_pair = first_section.split("-")
+            first_pair = (int(first_pair[0]), int(first_pair[1]),)
+            second_pair = second_section.split("-")
+            second_pair = (int(second_pair[0]), int(second_pair[1]),)
+    return count
+# ========================================================================
+
+
 if __name__ == "__main__":
     puzzle_input_filename = "day-4-input.txt"
     print(

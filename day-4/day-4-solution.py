@@ -36,6 +36,16 @@ def is_2nd_pair_subset_of_1st_pair(
     """Returns True if the range of numbers represented by the second pair is
     a subset of the range numbers represented by the first pair pair.
     """
+    first_pair_low_bound = first_pair[0]
+    first_pair_high_bound = first_pair[1]
+    second_pair_low_bound = second_pair[0]
+    second_pair_high_bound = second_pair[1]
+
+    if (
+        second_pair_low_bound >= first_pair_low_bound
+        and second_pair_high_bound <= first_pair_high_bound
+    ):
+        return True
     return False
 
 

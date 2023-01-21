@@ -18,8 +18,9 @@ def is_one_range_subset_of_another_range(
         first_num_range: tuple[int, int],
         second_num_range: tuple[int, int]
         ) -> bool:
-    """Returns True if the range of numbers represented by the one pair is a
-    subset of the range numbers represented by the another pair.
+    """Returns `True` if the range of numbers represented by the one pair is a
+    subset of the range numbers represented by the another pair. Otherwise,
+    it returns `False`.
 
     Parameters
     ----------
@@ -77,6 +78,24 @@ def subset_assignment_pairs_count(puzzle_input_filename: str) -> int:
 
 
 # -------------------------- PART TWO SOLUTION ===========================
+def does_num_ranges_overlap(
+        first_num_range: tuple[int, int],
+        second_num_range: tuple[int, int]
+        ) -> bool:
+    """Returns `True` if the range of numbers represented by the one pair
+    overlaps another range of numbers i.e., both of the given number ranges
+    have some common numbers. Otherwise, it returns `False`.
+
+    Parameters
+    ----------
+    first_num_range: A pair of numbers represented first and last numbers
+    of a range.
+    second_num_range: A pair of numbers representing first and last
+    numbers of a range.
+    """
+    return False
+
+
 def count_overlapping_ranges(puzzle_input_filename: str) -> int:
     """Returns the count of pairs where the two given number ranges overlap
     with one another i.e., some of the numbers between the two ranges are

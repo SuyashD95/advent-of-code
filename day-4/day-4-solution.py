@@ -18,8 +18,15 @@ def is_one_range_subset_of_another_range(
         first_num_range: tuple[int, int],
         second_num_range: tuple[int, int]
         ) -> bool:
-    """Returns True if the range of numbers represented by the one pair is a subset
-    of the range numbers represented by the another pair.
+    """Returns True if the range of numbers represented by the one pair is a
+    subset of the range numbers represented by the another pair.
+
+    Parameters
+    ----------
+    first_num_range: A pair of numbers represented first and last numbers
+    of a range.
+    second_num_range: A pair of numbers representing first and last
+    numbers of a range.
     """
     first_range_min_num = first_num_range[0]
     first_range_max_num = first_num_range[1]

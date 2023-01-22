@@ -12,3 +12,5 @@ Thank you [@Eric Wastl](https://adventofcode.com/about) for designing and sharin
 **Day 3: Rucksack Reorganization** [[Puzzle](https://adventofcode.com/2022/day/3)] [[Input File](/day-3/day-3-input.txt)] [[Solution](/day-3/day-3-solution.py)]
 
 **Day 4: Camp Cleanup** [[Puzzle](https://adventofcode.com/2022/day/4)] [[Input File](/day-4/day-4-input.txt)] [[Solution](/day-4/day-4-solution.py)]
+
+**Day 5: Supply Stacks** [[Puzzle](https://adventofcode.com/2022/day/5)] [[Input File](/day-5/day-5-input.txt)] [[Solution](/day-5/day-5-solution.py)]

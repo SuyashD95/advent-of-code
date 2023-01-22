@@ -12,6 +12,10 @@ Part 2 (Completed):
     Question: Find the item type that corresponds to the badges of each
     three-Elf group. What is the sum of the priorities of those item types?
     Answer: 2425
+-------------------
+
+Author: Suyash Dayal
+Orginally Completed On: 21st January 2023
 """
 from typing import cast
 from functools import reduce

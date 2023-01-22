@@ -1,15 +1,19 @@
 """
 Advent of Code 2022
 -------------------
-Day 4: Camp Cleanup (Part 1 Finished)
+Day 4: Camp Cleanup (Finished)
 
 Part 1 (Completed):
     Question: In how many assignment pairs does one range fully contain the other?
     Answer: 456
 
-Part 2 (Pending):
+Part 2 (Completed):
     Question: In how many assignment pairs do the ranges overlap?
-    Answer:
+    Answer: 808
+-------------------
+
+Author: Suyash Dayal
+Orginally Completed On: 22nd January 2023
 """
 
 
@@ -93,6 +97,22 @@ def does_num_ranges_overlap(
     second_num_range: A pair of numbers representing first and last
     numbers of a range.
     """
+    first_range_min_num = first_num_range[0]
+    first_range_max_num = first_num_range[1]
+    second_range_min_num = second_num_range[0]
+    second_range_max_num = second_num_range[1]
+
+    if (
+        second_range_min_num <= first_range_min_num <= second_range_max_num
+        or second_range_min_num <= first_range_max_num <= second_range_max_num
+    ):
+        return True
+    elif (
+        first_range_min_num <= second_range_min_num <= first_range_max_num
+        or first_range_min_num <= second_range_max_num <= first_range_max_num
+    ):
+        return True
+
     return False
 
 
@@ -119,6 +139,8 @@ def count_overlapping_ranges(puzzle_input_filename: str) -> int:
                 int(second_num_range[0]),
                 int(second_num_range[1]),
             )
+            if does_num_ranges_overlap(first_num_range, second_num_range):
+                count += 1
     return count
 # ========================================================================
 
@@ -128,4 +150,5 @@ if __name__ == "__main__":
     print(
         "Day 4 Answers:\n"
         f"  Part 1: {subset_assignment_pairs_count(puzzle_input_filename)}\n"
+        f"  Part 2: {count_overlapping_ranges(puzzle_input_filename)}"
     )

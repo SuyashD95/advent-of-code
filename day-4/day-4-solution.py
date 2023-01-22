@@ -142,7 +142,7 @@ def count_overlapping_ranges(puzzle_input_filename: str) -> int:
             if does_num_ranges_overlap(first_num_range, second_num_range):
                 count += 1
     return count
-# ========================================================================
+# -----------------------------------------------------------------------
 
 
 if __name__ == "__main__":

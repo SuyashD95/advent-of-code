@@ -8,6 +8,30 @@ Part 1 (Pending):
     ends up on top of each stack?
     Answer:
 """
+from io import TextIOWrapper
+
+
+def make_crates_matrix(puzzle_file: TextIOWrapper) -> list[list[str]]:
+    """Utility function that builds a matrix of characters representing
+    the crates placed in N stacks.
+
+    Parameters
+    ----------
+    puzzle_file: An object representing textual content in file.
+
+    Returns
+    -------
+    A list containing lists with each having a fixed number of characters.
+    """
+    crates_matrix = []
+    while input_line := puzzle_file.readline()[:-1]:
+        crate_layer = []
+        for crate_char in input_line:
+            if crate_char in ["[", "]"]:
+                crate_char = " "
+            crate_layer.append(crate_char)
+        crates_matrix.append(crate_layer)
+    return crates_matrix
 
 
 # -------------------------- PART ONE SOLUTION ---------------------------
@@ -19,18 +43,13 @@ def list_crates_at_top_of_rearranged_stacks(puzzle_input_filename: str) -> str:
     Parameters
     ----------
     puzzle_input_filename: Name of the file containing input dataset.
+
+    Returns
+    -------
+    A string containing name of crates that are placed at top of stacks.
     """
     with open(puzzle_input_filename) as puzzle_file:
-        crates_matrix = []
-        while input_line := puzzle_file.readline()[:-1]:
-            crate_layer = []
-            for crate_char in input_line:
-                if crate_char in ["[", "]", "\n"]:
-                    crate_char = " "
-                crate_layer.append(crate_char)
-            crates_matrix.append(crate_layer)
-        for index, layer in enumerate(crates_matrix):
-            print(f"Layer {index}: {layer}")
+        crates_matrix = make_crates_matrix(puzzle_file)
     return ""
 # ------------------------------------------------------------------------
 

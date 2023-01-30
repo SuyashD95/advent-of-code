@@ -20,6 +20,17 @@ def list_crates_at_top_of_rearranged_stacks(puzzle_input_filename: str) -> str:
     ----------
     puzzle_input_filename: Name of the file containing input dataset.
     """
+    with open(puzzle_input_filename) as puzzle_file:
+        crates_matrix = []
+        while input_line := puzzle_file.readline()[:-1]:
+            crate_layer = []
+            for crate_char in input_line:
+                if crate_char in ["[", "]", "\n"]:
+                    crate_char = " "
+                crate_layer.append(crate_char)
+            crates_matrix.append(crate_layer)
+        for index, layer in enumerate(crates_matrix):
+            print(f"Layer {index}: {layer}")
     return ""
 # ------------------------------------------------------------------------
 

@@ -36,11 +36,13 @@ def make_crates_matrix(puzzle_file: TextIOWrapper) -> list[list[str]]:
     return crates_matrix
 
 
-def extract_crate_stacks(crates_matrix: list[list[str]]) -> dict[int, list[str]]:
+def extract_crate_stacks(
+        crates_matrix: list[list[str]]
+) -> dict[int, list[str]]:
     """
     Utility function that finds and returns a mapped collection of
-    stacks, each containing a set of crates such that the topmost crate is placed
-    at the end of stack list.
+    stacks, each containing a set of crates such that the topmost crate is
+    placed at the end of stack list.
 
     Parameters
     ----------
@@ -83,8 +85,8 @@ def list_crates_at_top_of_rearranged_stacks(puzzle_input_filename: str) -> str:
     A string containing name of crates that are placed at top of stacks.
     """
     with open(puzzle_input_filename) as puzzle_file:
-        crates_matrix = make_crates_matrix(puzzle_file)
-        crate_stacks = extract_crate_stacks(crates_matrix)
+        crate_matrix = make_crates_matrix(puzzle_file)
+        crate_stacks = extract_crate_stacks(crate_matrix)
     return ""
 # ------------------------------------------------------------------------
 

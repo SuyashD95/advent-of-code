@@ -8,12 +8,24 @@ Part 1 (Finished):
     ends up on top of each stack?
     Answer: FCVRLMVQP
 """
-from io import TextIOWrapper
+from __future__ import annotations
+from typing import TYPE_CHECKING, TypeAlias, TypedDict
+
+if TYPE_CHECKING:
+    from io import TextIOWrapper
+
+    CharMatrix: TypeAlias = list[list[str]]
+    StackMap: TypeAlias = dict[int, list[str]]
+
+    class InstructionMap(TypedDict):
+        from_stack: int
+        to_stack: int
+        move_quantity: int
 
 NO_CRATE = " "
 
 
-def make_crates_matrix(puzzle_file: TextIOWrapper) -> list[list[str]]:
+def make_crates_matrix(puzzle_file: TextIOWrapper) -> CharMatrix:
     """Utility function that builds a matrix of characters representing
     the crates placed in N stacks.
 
@@ -36,7 +48,7 @@ def make_crates_matrix(puzzle_file: TextIOWrapper) -> list[list[str]]:
     return crates_matrix
 
 
-def create_movelist(puzzle_file: TextIOWrapper) -> list[dict[str, int]]:
+def create_movelist(puzzle_file: TextIOWrapper) -> list[InstructionMap]:
     """Utility function that builds a list of dictionaries where each
     dictionary codefies the instruction for crane operator to move N crates
     from one stack to another stack.
@@ -64,9 +76,7 @@ def create_movelist(puzzle_file: TextIOWrapper) -> list[dict[str, int]]:
     return movelist
 
 
-def extract_crate_stacks(
-        crates_matrix: list[list[str]]
-) -> dict[int, list[str]]:
+def extract_crate_stacks(crates_matrix: CharMatrix) -> StackMap:
     """
     Utility function that finds and returns a mapped collection of
     stacks, each containing a set of crates such that the topmost crate is

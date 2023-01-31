@@ -108,6 +108,27 @@ def extract_crate_stacks(crates_matrix: CharMatrix) -> StackMap:
     return crate_stacks
 
 
+def move_crates(
+    crate_stacks: StackMap,
+    move_command: InstructionMap
+) -> None:
+    """Simulates the movement of crates from one stack to the top of
+    another stack of crates by the crane operator, based on the given
+    move command.
+
+    Parameters
+    ----------
+    crate_stacks: Stack of crates placed on top of each other.
+    move_command: Tells number of crates to be moved between two stacks.
+    """
+    for _ in range(move_command["move_quantity"]):
+        try:
+            top_crate = crate_stacks[move_command["from_stack"]].pop()
+        except IndexError:
+            break
+        crate_stacks[move_command["to_stack"]].append(top_crate)
+
+
 # -------------------------- PART ONE SOLUTION ---------------------------
 def list_crates_at_top_of_rearranged_stacks(puzzle_input_filename: str) -> str:
     """Returns a string containing the name of crates that are placed at
@@ -128,12 +149,7 @@ def list_crates_at_top_of_rearranged_stacks(puzzle_input_filename: str) -> str:
         crate_stacks = extract_crate_stacks(crate_matrix)
 
         for move_map in move_order_list:
-            for _ in range(move_map["move_quantity"]):
-                try:
-                    top_crate = crate_stacks[move_map["from_stack"]].pop()
-                except IndexError:
-                    break
-                crate_stacks[move_map["to_stack"]].append(top_crate)
+            move_crates(crate_stacks, move_map)
 
         top_crate_list = []
         for stack in crate_stacks.values():

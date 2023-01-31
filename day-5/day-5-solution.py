@@ -1,12 +1,12 @@
 """
 Advent of Code 2022
 -------------------
-Day 5: Supply Stacks (Pending)
+Day 5: Supply Stacks (Part 1 Finished)
 
-Part 1 (Pending):
+Part 1 (Finished):
     Question: After the rearrangement procedure completes, what crate
     ends up on top of each stack?
-    Answer:
+    Answer: FCVRLMVQP
 """
 from io import TextIOWrapper
 
@@ -124,7 +124,11 @@ def list_crates_at_top_of_rearranged_stacks(puzzle_input_filename: str) -> str:
                 except IndexError:
                     break
                 crate_stacks[move_map["to_stack"]].append(top_crate)
-    return ""
+
+        top_crate_list = []
+        for stack in crate_stacks.values():
+            top_crate_list.append(stack[-1])
+    return "".join(top_crate_list)
 # ------------------------------------------------------------------------
 
 

@@ -151,14 +151,15 @@ def list_crates_at_top_of_rearranged_stacks(puzzle_input_filename: str) -> str:
     with open(puzzle_input_filename) as puzzle_file:
         crate_matrix = make_crates_matrix(puzzle_file)
         movelist = create_movelist(puzzle_file)
-        crate_stacks = extract_crate_stacks(crate_matrix)
 
-        for move_command in movelist:
-            move_crates(crate_stacks, move_command)
+    crate_stacks = extract_crate_stacks(crate_matrix)
 
-        top_crate_list = []
-        for stack in crate_stacks.values():
-            top_crate_list.append(stack[-1])
+    for move_command in movelist:
+        move_crates(crate_stacks, move_command)
+
+    top_crate_list = []
+    for stack in crate_stacks.values():
+        top_crate_list.append(stack[-1])
 
     return "".join(top_crate_list)
 # ------------------------------------------------------------------------
@@ -187,14 +188,15 @@ def list_crates_at_top_of_rearranged_stacks_using_9001(
     with open(puzzle_input_filename) as puzzle_file:
         crate_matrix = make_crates_matrix(puzzle_file)
         movelist = create_movelist(puzzle_file)
-        crate_stacks = extract_crate_stacks(crate_matrix)
 
-        for move_command in movelist:
-            move_crates(crate_stacks, move_command)
+    crate_stacks = extract_crate_stacks(crate_matrix)
 
-        top_crate_list = []
-        for stack in crate_stacks.values():
-            top_crate_list.append(stack[-1])
+    for move_command in movelist:
+        move_crates(crate_stacks, move_command)
+
+    top_crate_list = []
+    for stack in crate_stacks.values():
+        top_crate_list.append(stack[-1])
 
     return "".join(top_crate_list)
 # ------------------------------------------------------------------------

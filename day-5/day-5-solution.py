@@ -40,8 +40,27 @@ def create_movelist(puzzle_file: TextIOWrapper) -> list[dict[str, int]]:
     """Utility function that builds a list of dictionaries where each
     dictionary codefies the instruction for crane operator to move N crates
     from one stack to another stack.
+
+    Parameters
+    ----------
+    puzzle_file: An object representing textual content in file.
+
+    Returns
+    -------
+    A list of maps with each containing 3 key-value pairs: 'from_stack',
+    'to_stack', and 'move_quantity'.
     """
     movelist = []
+    while input_line := puzzle_file.readline()[:-1]:
+        move_quantity, from_stack, to_stack = map(
+            int,
+            input_line.split(" ")[1::2]
+        )
+        movelist.append({
+            "from_stack": from_stack,
+            "to_stack": to_stack,
+            "move_quantity": move_quantity
+        })
     return movelist
 
 

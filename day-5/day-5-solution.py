@@ -114,8 +114,16 @@ def list_crates_at_top_of_rearranged_stacks(puzzle_input_filename: str) -> str:
     """
     with open(puzzle_input_filename) as puzzle_file:
         crate_matrix = make_crates_matrix(puzzle_file)
-        move_order = create_movelist(puzzle_file)
+        move_order_list = create_movelist(puzzle_file)
         crate_stacks = extract_crate_stacks(crate_matrix)
+
+        for move_map in move_order_list:
+            for _ in range(move_map["move_quantity"]):
+                try:
+                    top_crate = crate_stacks[move_map["from_stack"]].pop()
+                except IndexError:
+                    break
+                crate_stacks[move_map["to_stack"]].append(top_crate)
     return ""
 # ------------------------------------------------------------------------
 

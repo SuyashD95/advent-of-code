@@ -36,6 +36,15 @@ def make_crates_matrix(puzzle_file: TextIOWrapper) -> list[list[str]]:
     return crates_matrix
 
 
+def create_movelist(puzzle_file: TextIOWrapper) -> list[dict[str, int]]:
+    """Utility function that builds a list of dictionaries where each
+    dictionary codefies the instruction for crane operator to move N crates
+    from one stack to another stack.
+    """
+    movelist = []
+    return movelist
+
+
 def extract_crate_stacks(
         crates_matrix: list[list[str]]
 ) -> dict[int, list[str]]:
@@ -86,6 +95,7 @@ def list_crates_at_top_of_rearranged_stacks(puzzle_input_filename: str) -> str:
     """
     with open(puzzle_input_filename) as puzzle_file:
         crate_matrix = make_crates_matrix(puzzle_file)
+        move_order = create_movelist(puzzle_file)
         crate_stacks = extract_crate_stacks(crate_matrix)
     return ""
 # ------------------------------------------------------------------------

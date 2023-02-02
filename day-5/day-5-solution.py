@@ -1,17 +1,21 @@
 """
 Advent of Code 2022
 -------------------
-Day 5: Supply Stacks (Part 1 Finished)
+Day 5: Supply Stacks (Finished)
 
 Part 1 (Completed):
     Question: After the rearrangement procedure completes, what crate
     ends up on top of each stack?
     Answer: FCVRLMVQP
 
-Part 2 (Pending):
+Part 2 (Completed):
     Question: After rearrangement procedure (performed by CrateMover9001)
     completes, what crate ends up on top each stack?
-    Answer:
+    Answer: RWLWGJGFD
+-------------------
+
+Author: Suyash Dayal
+Originally Completed On: 2nd February 2023
 """
 from __future__ import annotations
 from typing import TYPE_CHECKING, TypeAlias, TypedDict

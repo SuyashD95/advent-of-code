@@ -182,12 +182,12 @@ def move_crates_using_9001(
     crate_stacks: Stack of crates placed on top of each other.
     move_command: Tells number of crates to be moved between two stacks.
     """
-    for _ in range(move_command["move_quantity"]):
-        try:
-            top_crate = crate_stacks[move_command["from_stack"]].pop()
-        except IndexError:
-            break
-        crate_stacks[move_command["to_stack"]].append(top_crate)
+    source_stack = crate_stacks[move_command["from_stack"]]
+    target_stack = crate_stacks[move_command["to_stack"]]
+    crates_to_be_moved = move_command["move_quantity"]
+
+    target_stack.extend(source_stack[-crates_to_be_moved:])
+    del source_stack[-crates_to_be_moved:]
 
 
 # -------------------------- PART TWO SOLUTION ---------------------------

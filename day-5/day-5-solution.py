@@ -165,6 +165,31 @@ def list_crates_at_top_of_rearranged_stacks(puzzle_input_filename: str) -> str:
 # ------------------------------------------------------------------------
 
 
+def move_crates_using_9001(
+    crate_stacks: StackMap,
+    move_command: InstructionMap
+) -> None:
+    """Simulates the transfer of collection of boxes from one crate stack to
+    another without changing the order of the crates, based on the given
+    move command.
+
+    NOTE: This operation is performed by CrateMover9001 crane that is capable
+    of picking up & moving multiple crates at once, without changing the
+    original order.
+
+    Parameters
+    ----------
+    crate_stacks: Stack of crates placed on top of each other.
+    move_command: Tells number of crates to be moved between two stacks.
+    """
+    for _ in range(move_command["move_quantity"]):
+        try:
+            top_crate = crate_stacks[move_command["from_stack"]].pop()
+        except IndexError:
+            break
+        crate_stacks[move_command["to_stack"]].append(top_crate)
+
+
 # -------------------------- PART TWO SOLUTION ---------------------------
 def list_crates_at_top_of_rearranged_stacks_using_9001(
     puzzle_input_filename: str
@@ -192,7 +217,7 @@ def list_crates_at_top_of_rearranged_stacks_using_9001(
     crate_stacks = extract_crate_stacks(crate_matrix)
 
     for move_command in movelist:
-        move_crates(crate_stacks, move_command)
+        move_crates_using_9001(crate_stacks, move_command)
 
     top_crate_list = []
     for stack in crate_stacks.values():

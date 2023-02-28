@@ -14,6 +14,7 @@ Part 2 (Pending):
     Answer:
 """
 from typing import Optional
+from collections import deque
 
 
 def char_count_till_end_of_unique_substring(
@@ -38,16 +39,19 @@ def char_count_till_end_of_unique_substring(
     In case, no substring is found to be satisfying the uniqueness criterion,
     the function returns `None`.
     """
-    window_char_list = []
+    substr_window = deque(maxlen=unique_substr_length)
     for index, char in enumerate(base_string):
         if index < unique_substr_length:
-            window_char_list.append(char)
+            substr_window.append(char)
             continue
-        if len(set(window_char_list)) == unique_substr_length:
+        if len(set(substr_window)) == unique_substr_length:
             return index
         else:
-            window_char_list.pop(0)
-            window_char_list.append(char)
+            substr_window.popleft()
+            substr_window.append(char)
+
+    if len(set(substr_window)) == unique_substr_length:
+        return len(base_string)
 
 
 # -------------------------- PART ONE SOLUTION ---------------------------

@@ -1,18 +1,23 @@
 """
 Advent of Code 2022
 -------------------
-Day 6: Tuning Trouble (Pending)
+Day 6: Tuning Trouble (Part 1 Finished)
 
-Part 1 (Pending):
+Part 1 (Completed):
     Question: How many characters need to be processed before the first
     start-of-packet marker is detected?
+    Answer: 1034
+
+Part 2 (Pending):
+    Question: How many characters need to be processes before the first
+    start-of-message marker is detected?
     Answer:
 """
 from typing import Optional
 
 
 # -------------------------- PART ONE SOLUTION ---------------------------
-def characters_processed_to_find_start_market(
+def characters_processed_to_find_start_marker(
     puzzle_input_filename: str,
 ) -> Optional[int]:
     """Returns the number of characters that were needed to be processed
@@ -48,5 +53,5 @@ if __name__ == "__main__":
     puzzle_input_filename = "day-6-input.txt"
     print(
         "Day 6 Answers:\n"
-        f"  Part 1: {characters_processed_to_find_start_market(puzzle_input_filename)}\n"
+        f"  Part 1: {characters_processed_to_find_start_marker(puzzle_input_filename)}\n"
     )

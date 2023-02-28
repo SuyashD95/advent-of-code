@@ -1,17 +1,21 @@
 """
 Advent of Code 2022
 -------------------
-Day 6: Tuning Trouble (Part 1 Finished)
+Day 6: Tuning Trouble (Finished)
 
 Part 1 (Completed):
     Question: How many characters need to be processed before the first
     start-of-packet marker is detected?
     Answer: 1034
 
-Part 2 (Pending):
+Part 2 (Completed):
     Question: How many characters need to be processes before the first
     start-of-message marker is detected?
-    Answer:
+    Answer: 2472
+-------------------
+
+Author: Suyash Dayal
+Originally Completed On: 28th February 2023
 """
 from typing import Optional
 from collections import deque
@@ -80,9 +84,36 @@ def characters_processed_to_find_start_marker(
 # ------------------------------------------------------------------------
 
 
+# -------------------------- PART TWO SOLUTION ---------------------------
+def chars_counted_to_find_start_of_message_marker(
+    puzzle_input_filename: str,
+) -> Optional[int]:
+    """Returns the number of characters that were needed to be processed
+    in the given datastream to detect the start-of-message marker (which
+    is a sequence of 14 characters that are all different).
+
+    Parameters
+    ----------
+    puzzle_input_filename: Name of the file containing input dataset.
+
+    Returns
+    -------
+    Number of characters processed before finding the start-of-message marker.
+    """
+    REQUIRED_UNIQUE_CHARS = 14
+
+    with open(puzzle_input_filename) as puzzle_file:
+        datastream = puzzle_file.read()[:-1]
+        return char_count_till_end_of_unique_substring(
+            datastream, REQUIRED_UNIQUE_CHARS
+        )
+# ------------------------------------------------------------------------
+
+
 if __name__ == "__main__":
     puzzle_input_filename = "day-6-input.txt"
     print(
         "Day 6 Answers:\n"
         f"  Part 1: {characters_processed_to_find_start_marker(puzzle_input_filename)}\n"
+        f"  Part 2: {chars_counted_to_find_start_of_message_marker(puzzle_input_filename)}\n"
     )

@@ -16,6 +16,37 @@ Part 2 (Pending):
 from typing import Optional
 
 
+def char_count_till_end_of_unique_substring(base_string: str, unique_substr_length: int) -> Optional[int]:
+    """Returns the number of characters that were required to be searched to
+    find a substring from the provided string where each character is
+    different.
+
+    Parameters
+    ----------
+    base_string: The original string to be searched.
+    unique_substr_length: A natural number greater than 1, representing the
+    length of the unique substring.
+
+    Returns
+    -------
+    Returns no. of characters that were processed in the base string to find
+    a substring of the provided length, where each character is different.
+
+    In case, no substring is found to be satisfying the uniqueness criterion,
+    the function returns `None`.
+    """
+    window_char_list = []
+    for index, char in enumerate(base_string):
+        if index < unique_substr_length:
+            window_char_list.append(char)
+            continue
+        if len(set(window_char_list)) == unique_substr_length:
+            return index
+        else:
+            window_char_list.pop(0)
+            window_char_list.append(char)
+
+
 # -------------------------- PART ONE SOLUTION ---------------------------
 def characters_processed_to_find_start_marker(
     puzzle_input_filename: str,

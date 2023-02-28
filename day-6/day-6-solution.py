@@ -8,11 +8,13 @@ Part 1 (Pending):
     start-of-packet marker is detected?
     Answer:
 """
+from typing import Optional
 
 
+# -------------------------- PART ONE SOLUTION ---------------------------
 def characters_processed_to_find_start_market(
-    puzzle_input_filename: str
-) -> int:
+    puzzle_input_filename: str,
+) -> Optional[int]:
     """Returns the number of characters that were needed to be processed
     in the given datastream to detect the start-of-packet marker (which
     is a sequence of 4 characters that are all different).
@@ -25,7 +27,21 @@ def characters_processed_to_find_start_market(
     -------
     Number of characters processed before finding the start marker.
     """
-    return 0
+    REQUIRED_UNIQUE_CHARS = 4
+
+    with open(puzzle_input_filename) as puzzle_file:
+        datastream = puzzle_file.read()[:-1]
+        window_char_list = []
+        for index, char in enumerate(datastream):
+            if index < REQUIRED_UNIQUE_CHARS:
+                window_char_list.append(char)
+                continue
+            if len(set(window_char_list)) == REQUIRED_UNIQUE_CHARS:
+                return index
+            else:
+                window_char_list.pop(0)
+                window_char_list.append(char)
+# ------------------------------------------------------------------------
 
 
 if __name__ == "__main__":

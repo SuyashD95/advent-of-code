@@ -16,7 +16,10 @@ Part 2 (Pending):
 from typing import Optional
 
 
-def char_count_till_end_of_unique_substring(base_string: str, unique_substr_length: int) -> Optional[int]:
+def char_count_till_end_of_unique_substring(
+    base_string: str,
+    unique_substr_length: int
+) -> Optional[int]:
     """Returns the number of characters that were required to be searched to
     find a substring from the provided string where each character is
     different.
@@ -67,16 +70,9 @@ def characters_processed_to_find_start_marker(
 
     with open(puzzle_input_filename) as puzzle_file:
         datastream = puzzle_file.read()[:-1]
-        window_char_list = []
-        for index, char in enumerate(datastream):
-            if index < REQUIRED_UNIQUE_CHARS:
-                window_char_list.append(char)
-                continue
-            if len(set(window_char_list)) == REQUIRED_UNIQUE_CHARS:
-                return index
-            else:
-                window_char_list.pop(0)
-                window_char_list.append(char)
+        return char_count_till_end_of_unique_substring(
+            datastream, REQUIRED_UNIQUE_CHARS
+        )
 # ------------------------------------------------------------------------
 
 

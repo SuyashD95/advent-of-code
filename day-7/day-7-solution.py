@@ -7,15 +7,11 @@ Part 1 (Pending):
     Question: What is the sum of the total sizes of those directories?
     Answer:
 """
+from __future__ import annotations
 import typing
 
 from dataclasses import dataclass
 from enum import Enum, auto
-
-# Initialization
-# --------------
-fs_root: FSElement | None
-cwd: FSElement | None
 
 
 # Filesystem
@@ -42,7 +38,7 @@ class FSElement:
 # ------
 class InputParser:
 
-    def __init__(self, termstream: typing.TextIO) -> InputParser
+    def __init__(self, termstream: typing.TextIO) -> InputParser:
         """Initializes an object.
         
         Parameters
@@ -51,6 +47,19 @@ class InputParser:
         as present in a virtual terminal application.
         """
         self.termstream = termstream
+        self.fs_root: FSElement | None = None
+        self.cwd: FSElement | None = None
+
+    def parse(self) -> FSElement | None:
+        """This function is used for parsing the given stream and
+        constructing the virtual filesystem on which further operations
+        can be performed.
+        """
+        with open(puzzle_input_filename) as puzzle_file:
+            while terminal_output := puzzle_file.readline()[:-1]:
+                print(terminal_output)
+
+        return self.fs_root
 
     def parse_command(self, command: str) -> list[str]:
         """Parse the given command in the file to perform some action in
@@ -79,10 +88,8 @@ def sum_of_directories_under_100k(puzzle_input_filename: str) -> int:
     -------
     The total size of all directories whose size is utmost 100K.
     """
-    with open(puzzle_input_filename) as puzzle_file:
-        while terminal_output := puzzle_file.readline()[:-1]:
-            print(terminal_output)
-
+    file_parser = InputParser(puzzle_input_filename)
+    fs_tree = file_parser.parse()
     return 0
 
 

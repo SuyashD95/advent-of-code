@@ -38,6 +38,17 @@ class FSElement:
     parent: FSElement | None
 
 
+# Command Executioners
+# --------------------
+class CmdExec(typing.Protocol):
+    """This Protocol class defines the structure of all classes that
+    will be responsible for the execution of a particular command.
+    """
+
+    def execute(self) -> None:
+	...
+
+
 # Parser
 # ------
 class InputParser:

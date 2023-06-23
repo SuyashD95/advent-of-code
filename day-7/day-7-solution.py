@@ -52,19 +52,55 @@ class CmdExec(typing.Protocol):
 class CdExec:
     """This class handles the execution of the Change Directory ('cd') command."""
 
-    def __init__(self, path):
+    def __init__(self, path: str) -> None:
+        """Initializes an object.
+        
+        Parameters
+        ----------
+        path: The target directory.
+        """
         self.path = path
 
     def execute(self) -> None:
         """This method make changes to the tree structure for the virtual filesystem
         based on the information provided with the 'cd' command.
         """
-        print(f"Change path to: {cmd_terms[1]}")
+        print(f"Change path to: {self.path}")
+
+
+class LsExec:
+    """This class handles the execution of List ('ls') command."""
+
+    def __init__(self, file_handler: typing.TextIO) -> None:
+        """Initializes an object.
+        
+        Parameters
+        ----------
+        file_handler: File pointer processing a terminal output file.
+        """
+        self.file_handler = file_handler
+
+    def execute(self) -> None:
+        """This method make changes to the tree structure for the virtual
+        filesystem based on the information provided with the 'ls' command.
+        """
+        while True:
+            current_position_in_file = self.file_handler.tell()
+            next_line = self.file_handler.readline()[:-1]
+            if next_line:
+                if next_line[0] == COMMAND_IDENTIFIER:
+                    self.file_handler.seek(current_position_in_file)
+                    break
+                else:
+                    print(f"ls command output: {next_line}")
+            else:
+                break
 
 
 # Parser
 # ------
 class InputParser:
+    """This class is used for parsing the stream of text from a given file."""
 
     def __init__(self, termstream: typing.TextIO) -> InputParser:
         """Initializes an object.

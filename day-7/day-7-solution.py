@@ -13,6 +13,10 @@ import typing
 from dataclasses import dataclass
 from enum import Enum, auto
 
+# Initialization
+# --------------
+COMMAND_IDENTIFIER = "$"
+ROOT_DIR_PATH = "/"
 
 # Filesystem
 # ----------
@@ -60,17 +64,15 @@ class InputParser:
         The root element of the FSTree, representing the '/' directory
         of the filesystem.
         """
-        COMMAND_IDENTIFIER = "$"
-
         with open(puzzle_input_filename) as puzzle_file:
             while terminal_output := puzzle_file.readline()[:-1]:
-                print(terminal_output)
                 output_terms = terminal_output.split()
                 if output_terms[0] == COMMAND_IDENTIFIER:
                     self.parse_command(output_terms[1:], puzzle_file)
+        print("Reached the end of file.")
         return self.fs_root
 
-    def parse_command(self, cmd_terms: list[str], file_handler: typing.TextIO) -> list[str]:
+    def parse_command(self, cmd_terms: list[str], file_handler: typing.TextIO) -> None:
         """Parse the given command in the file to perform some action in
         the virtual filesystem and move the file pointer to the next
         statement to be executed.
@@ -81,25 +83,22 @@ class InputParser:
         the virtual OS.
         file_handler: Pointer operating on the given file.
         """
-        print(f"Command Terms: {cmd_terms}")
         command = cmd_terms[0]
-        print(f"Command Type: {command}")
         if command == "ls":
             while True:
                 current_position_in_file = file_handler.tell()
-                print(f"Current position in file: {current_position_in_file}")
                 next_line = file_handler.readline()[:-1]
                 if next_line:
-                    print(next_line)
-                    print(f"New position in file after reading: {file_handler.tell()}")
-                    if next_line[0] == "$":
+                    if next_line[0] == COMMAND_IDENTIFIER:
                         file_handler.seek(current_position_in_file)
-                        print(f"Position in file after resetting: {file_handler.tell()}")
                         break
+                    else:
+                        print(f"ls command output: {next_line}")
                 else:
-                    print(f"No newline to parse. Position at EOF: {file_handler.tell()}")
                     break
-            
+        elif command == "cd":
+            print(f"Change path to: {cmd_terms[1]}")
+
 
 # Part 1 Solution
 # ---------------

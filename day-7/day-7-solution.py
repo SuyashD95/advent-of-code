@@ -46,7 +46,20 @@ class CmdExec(typing.Protocol):
     """
 
     def execute(self) -> None:
-	...
+        ...
+
+
+class CdExec:
+    """This class handles the execution of the Change Directory ('cd') command."""
+
+    def __init__(self, path):
+        self.path = path
+
+    def execute(self) -> None:
+        """This method make changes to the tree structure for the virtual filesystem
+        based on the information provided with the 'cd' command.
+        """
+        print(f"Change path to: {cmd_terms[1]}")
 
 
 # Parser

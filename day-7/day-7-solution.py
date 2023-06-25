@@ -10,7 +10,7 @@ Part 1 (Pending):
 from __future__ import annotations
 import typing
 
-from abc import ABC
+from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from enum import Enum, auto
 
@@ -42,13 +42,17 @@ class FSElement:
 
 # Command Executioners
 # --------------------
-class CmdExec(typing.Protocol):
-    """This Protocol class defines the structure of all classes that
+class CmdExec(ABC):
+    """This abstract bas  class defines the structure of all classes that
     will be responsible for the execution of a particular command.
     """
 
+    def __init__(self, current_node: FSElement | None) -> None:
+        self.current_node = current_node
+
+    @abstractmethod
     def execute(self) -> None:
-        ...
+        pass
 
 
 class CdExec:

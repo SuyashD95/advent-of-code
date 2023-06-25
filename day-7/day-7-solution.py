@@ -10,6 +10,7 @@ Part 1 (Pending):
 from __future__ import annotations
 import typing
 
+from abc import ABC
 from dataclasses import dataclass
 from enum import Enum, auto
 
@@ -31,11 +32,12 @@ class FSType(Enum):
 class FSElement:
     """A representation of a file/directory in the filesystem."""
 
-    fs_type: FSType
     children: list[FSElement]
-    size: int
-    name: str
-    parent: FSElement | None
+    fs_type: FSType = FSType.DIRECTORY
+    size: int = 0
+    name: str = ""
+    parent: FSElement | None = None
+    is_explored: bool = False
 
 
 # Command Executioners

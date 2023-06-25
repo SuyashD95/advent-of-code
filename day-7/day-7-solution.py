@@ -55,23 +55,25 @@ class CmdExec(ABC):
         pass
 
 
-class CdExec:
+class CdExec(CmdExec):
     """This class handles the execution of the Change Directory ('cd') command."""
 
-    def __init__(self, path: str) -> None:
+    def __init__(self, current_node: FSElement | None, path: str) -> None:
         """Initializes an object.
         
         Parameters
         ----------
+        current_node: Node representing current working directory.
         path: The target directory.
         """
+        super().__init__(current_node)
         self.path = path
 
     def execute(self) -> None:
         """This method make changes to the tree structure for the virtual filesystem
         based on the information provided with the 'cd' command.
         """
-        print(f"Change path to: {self.path}")
+        return None
 
 
 class LsExec:

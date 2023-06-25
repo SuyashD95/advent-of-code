@@ -76,16 +76,18 @@ class CdExec(CmdExec):
         return None
 
 
-class LsExec:
+class LsExec(CmdExec):
     """This class handles the execution of List ('ls') command."""
 
-    def __init__(self, file_handler: typing.TextIO) -> None:
+    def __init__(self, current_node: FSElement | None, file_handler: typing.TextIO) -> None:
         """Initializes an object.
         
         Parameters
         ----------
+        current_node: Node representing current working directory.
         file_handler: File pointer processing a terminal output file.
         """
+        super().__init__(current_node)
         self.file_handler = file_handler
 
     def execute(self) -> None:
@@ -99,10 +101,8 @@ class LsExec:
                 if next_line[0] == COMMAND_IDENTIFIER:
                     self.file_handler.seek(current_position_in_file)
                     break
-                else:
-                    print(f"ls command output: {next_line}")
-            else:
-                break
+                continue
+            break
 
 
 # Parser
@@ -137,7 +137,6 @@ class InputParser:
                 output_terms = terminal_output.split()
                 if output_terms[0] == COMMAND_IDENTIFIER:
                     self.parse_command(output_terms[1:], puzzle_file)
-        print("Reached the end of file.")
         return self.fs_root
 
     def parse_command(self, cmd_terms: list[str], file_handler: typing.TextIO) -> None:

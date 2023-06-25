@@ -152,19 +152,11 @@ class InputParser:
         """
         command = cmd_terms[0]
         if command == "ls":
-            while True:
-                current_position_in_file = file_handler.tell()
-                next_line = file_handler.readline()[:-1]
-                if next_line:
-                    if next_line[0] == COMMAND_IDENTIFIER:
-                        file_handler.seek(current_position_in_file)
-                        break
-                    else:
-                        print(f"ls command output: {next_line}")
-                else:
-                    break
+            lsRunner = LsExec(self.cwd, file_handler)
+            lsRunner.execute()
         elif command == "cd":
-            print(f"Change path to: {cmd_terms[1]}")
+            cdRunner = CdExec(self.cwd, cmd_terms[1])
+            cdRunner.execute()
 
 
 # Part 1 Solution

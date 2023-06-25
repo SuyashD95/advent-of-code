@@ -47,29 +47,31 @@ class CmdExec(ABC):
     will be responsible for the execution of a particular command.
     """
 
-    def __init__(self, current_node: FSElement | None) -> None:
-        self.current_node = current_node
+    def __init__(self, workdir: FSElement | None) -> None:
+        self.workdir = workdir
 
     @abstractmethod
-    def execute(self) -> None:
+    def execute(self) -> typing.Any:
         pass
 
 
 class CdExec(CmdExec):
     """This class handles the execution of the Change Directory ('cd') command."""
 
-    def __init__(self, current_node: FSElement | None, path: str) -> None:
+    def __init__(self, current_dir: FSElement | None, root_dir: FSElement | None, pathname: str) -> None:
         """Initializes an object.
         
         Parameters
         ----------
-        current_node: Node representing current working directory.
-        path: The target directory.
+        current_dir: An object representing current working directory.
+        root_dir: An object representing the root directory.
+        pathname: The string representing the target location.
         """
-        super().__init__(current_node)
-        self.path = path
+        super().__init__(current_dir)
+        self.root_dir = root_dir
+        self.pathname = pathname
 
-    def execute(self) -> None:
+    def execute(self) -> FSElement | None:
         """This method make changes to the tree structure for the virtual filesystem
         based on the information provided with the 'cd' command.
         """
@@ -79,15 +81,15 @@ class CdExec(CmdExec):
 class LsExec(CmdExec):
     """This class handles the execution of List ('ls') command."""
 
-    def __init__(self, current_node: FSElement | None, file_handler: typing.TextIO) -> None:
+    def __init__(self, current_dir: FSElement | None, file_handler: typing.TextIO) -> None:
         """Initializes an object.
         
         Parameters
         ----------
-        current_node: Node representing current working directory.
+        current_dir: An oject representing current working directory.
         file_handler: File pointer processing a terminal output file.
         """
-        super().__init__(current_node)
+        super().__init__(current_dir)
         self.file_handler = file_handler
 
     def execute(self) -> None:
@@ -155,7 +157,7 @@ class InputParser:
             lsRunner = LsExec(self.cwd, file_handler)
             lsRunner.execute()
         elif command == "cd":
-            cdRunner = CdExec(self.cwd, cmd_terms[1])
+            cdRunner = CdExec(self.cwd, self.fs_root, cmd_terms[1])
             cdRunner.execute()
 
 

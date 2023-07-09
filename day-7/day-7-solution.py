@@ -122,6 +122,11 @@ class LsExec(CmdExec):
         """This method make changes to the tree structure for the virtual
         filesystem based on the information provided with the 'ls' command.
         """
+        LS_DIR_IDENTIFIER = "dir"
+
+        if (not self.workdir) or (self.workdir.is_explored):
+            return None
+
         while True:
             current_position_in_file = self.file_handler.tell()
             next_line = self.file_handler.readline()[:-1]
@@ -129,8 +134,22 @@ class LsExec(CmdExec):
                 if next_line[0] == COMMAND_IDENTIFIER:
                     self.file_handler.seek(current_position_in_file)
                     break
-                continue
-            break
+                type_or_filesize, name = next_line.split()
+                if type_or_filesize == LS_DIR_IDENTIFIER:
+                    new_directory = FSElement(name=name, parent=self.workdir)
+                    self.workdir.children.append(new_directory)
+                else:
+                    new_file = FSElement(
+                        name=name,
+                        parent=self.workdir,
+                        fs_type=FSType.FILE,
+                        size=int(type_or_filesize),
+                        is_explored=True
+                    )
+                    self.workdir.children.append(new_file)
+            else:
+                break
+        self.workdir.is_explored = True
 
 
 # Parser

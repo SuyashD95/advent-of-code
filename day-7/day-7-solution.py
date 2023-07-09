@@ -171,7 +171,9 @@ class InputParser:
             lsRunner.execute()
         elif command == "cd":
             cdRunner = CdExec(self.cwd, self.fs_root, cmd_terms[1])
-            cdRunner.execute()
+            new_workdir = cdRunner.execute()
+            self.fs_root = self.fs_root or new_workdir
+            self.cwd = new_workdir
 
 
 # Part 1 Solution

@@ -8,8 +8,8 @@ Part 1 (Pending):
     Answer:
 """
 from __future__ import annotations
-import typing
 
+import typing
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from enum import Enum, auto
@@ -40,6 +40,19 @@ class FSElement:
     parent: FSElement | None = None
     is_explored: bool = False
 
+    def __str__(self):
+        """A string representation for the instance."""
+        if self.fs_type == FSType.FILE:
+            return f"File: {self.name} ({self.size})"
+        else:
+            no_of_files = no_of_folders = 0
+            for child in self.children:
+                if child.fs_type == FSType.FILE:
+                    no_of_files += 1
+                else:
+                    no_of_folders += 1
+            return f"Directory: {self.name} [{no_of_folders} folder(s), {no_of_files} file(s)]"
+
 
 # Command Executioners
 # --------------------
@@ -61,7 +74,7 @@ class CdExec(CmdExec):
 
     def __init__(self, current_dir: FSElement | None, root_dir: FSElement | None, pathname: str) -> None:
         """Initializes an object.
-        
+
         Parameters
         ----------
         current_dir: An object representing current working directory.
@@ -96,7 +109,7 @@ class LsExec(CmdExec):
 
     def __init__(self, current_dir: FSElement | None, file_handler: typing.TextIO) -> None:
         """Initializes an object.
-        
+
         Parameters
         ----------
         current_dir: An oject representing current working directory.
@@ -127,7 +140,7 @@ class InputParser:
 
     def __init__(self, termstream: typing.TextIO) -> InputParser:
         """Initializes an object.
-        
+
         Parameters
         ----------
         termstream: A file containing a set of commands and their outputs

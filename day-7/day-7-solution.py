@@ -76,7 +76,19 @@ class CdExec(CmdExec):
         """This method make changes to the tree structure for the virtual filesystem
         based on the information provided with the 'cd' command.
         """
-        return None
+        if self.pathname == ROOT_DIR_PATH:
+            if not self.root_dir:
+                self.root_dir = FSElement(name=ROOT_DIR_PATH)
+            return self.root_dir
+        elif self.pathname == GOTO_PARENT_DIR:
+            if self.workdir and self.workdir.parent:
+                return self.workdir.parent
+        else:
+            if self.workdir:
+                for child in self.workdir.children:
+                    if child.fs_type == FSType.DIRECTORY and child.name == self.pathname:
+                        return child
+            return self.workdir
 
 
 class LsExec(CmdExec):

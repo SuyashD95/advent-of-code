@@ -11,13 +11,14 @@ from __future__ import annotations
 import typing
 
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum, auto
 
 # Initialization
 # --------------
 COMMAND_IDENTIFIER = "$"
 ROOT_DIR_PATH = "/"
+GOTO_PARENT_DIR = ".."
 
 # Filesystem
 # ----------
@@ -32,7 +33,7 @@ class FSType(Enum):
 class FSElement:
     """A representation of a file/directory in the filesystem."""
 
-    children: list[FSElement]
+    children: list[FSElement] = field(default_factory=lambda: [])
     fs_type: FSType = FSType.DIRECTORY
     size: int = 0
     name: str = ""

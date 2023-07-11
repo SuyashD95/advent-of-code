@@ -208,6 +208,20 @@ class InputParser:
             self.cwd = new_workdir
 
 
+def calculate_directory_sizes(vfs_tree: FSElement) -> None:
+    """This helper function traverses the given virtual fileystem
+    tree and calculate the total size of every directory node.
+    The total size of a directory node is equivalent to the sum
+    of all files and directories contained inside it.
+
+    Parameters
+    ----------
+    vfs_tree: A tree data structure that represents the virtual
+    filesystem where each node is an abstraction of a file/folder.
+    """
+    pass
+
+
 # Part 1 Solution
 # ---------------
 def sum_of_directories_under_100k(puzzle_input_filename: str) -> int:

@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import typing
 from abc import ABC, abstractmethod
+from collections import deque
 from dataclasses import dataclass, field
 from enum import Enum, auto
 
@@ -219,7 +220,23 @@ def calculate_directory_sizes(vfs_tree: FSElement) -> None:
     vfs_tree: A tree data structure that represents the virtual
     filesystem where each node is an abstraction of a file/folder.
     """
-    pass
+    traversal_queue = deque([vfs_tree])
+    node_expansion_queue = deque([False])
+
+    while front_traversal_node := traversal_queue[0] if traversal_queue else None:
+        if front_traversal_node.fs_type == FSType.DIRECTORY:
+            if not node_expansion_queue[0]:
+                node_expansion_queue[0] = True
+                traversal_queue.extendleft(front_traversal_node.children)
+                node_expansion_queue.extendleft([False]*len(front_traversal_node.children))
+            else:
+                front_traversal_node.size = sum(map(lambda child: child.size, front_traversal_node.children))
+                traversal_queue.popleft()
+                node_expansion_queue.popleft()
+        else:
+            front_traversal_node.parent.size += front_traversal_node.size
+            traversal_queue.popleft()
+            node_expansion_queue.popleft()
 
 
 # Part 1 Solution
@@ -239,6 +256,7 @@ def sum_of_directories_under_100k(puzzle_input_filename: str) -> int:
     """
     file_parser = InputParser(puzzle_input_filename)
     fs_tree = file_parser.parse()
+    calculate_directory_sizes(fs_tree)
     return 0
 
 

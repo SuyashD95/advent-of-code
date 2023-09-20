@@ -1,11 +1,20 @@
 """
 Advent of Code 2022
 -------------------
-Day 7: No Space Left On Device (Pending)
+Day 7: No Space Left On Device (Part 1 Finished)
 
-Part 1 (Pending):
-    Question: What is the sum of the total sizes of those directories?
+Part 1 (Completed):
+    Question: Find all of the directories with a total size of at most 100000. What is the sum of the
+    total sizes of those directories?
+    Answer: 1297159
+
+Part 2 (Pending):
+    Question: Find the smallest directory that, if deleted, would free up enough space on the filesystem
+    to run the update. What is the total size of that directory?
     Answer:
+-------------------
+
+Author: Suyash Dayal
 """
 from __future__ import annotations
 
@@ -270,9 +279,41 @@ def sum_of_directories_under_100k(puzzle_input_filename: str) -> int:
     return total_size_of_dirs_under_100k
 
 
+# Part 2 Solution
+# ---------------
+def smallest_directory_to_regain_space(puzzle_input_filename: str) -> int:
+    """Returns the total size of the smallest directory that, if deleted, would
+    free up enough space on the filesystem to run the update.
+
+    Parameters
+    ----------
+    puzzle_input_filename: Name of text file containing input dataset.
+
+    Returns
+    -------
+    The total size of the smallest directory that, if deleted, would free up
+    enough space on the filesystem to run the update. In case, no such directory
+    exists, returns -1. And, if the filesystem is already large enough to run
+    the update, returns 0.
+    """
+    MAX_FILESYSTEM_SIZE = 70_000_000
+    MIN_SPACE_REQUIRED_TO_RUN_UPDATE = 30_000_000
+
+    file_parser = InputParser(puzzle_input_filename)
+    fs_tree = file_parser.parse()
+    calculate_directory_sizes(fs_tree)
+
+    available_space = MAX_FILESYSTEM_SIZE - fs_tree.size
+    if available_space >= MIN_SPACE_REQUIRED_TO_RUN_UPDATE:
+        return 0
+
+    return -1
+
+
 if __name__ == "__main__":
     puzzle_input_filename = "day-7-input.txt"
     print(
         "Day 7 Answers:\n"
-        f"  Part 1: {sum_of_directories_under_100k(puzzle_input_filename)}"
+        f"  Part 1: {sum_of_directories_under_100k(puzzle_input_filename)}\n"
+        f"  Part 2: {smallest_directory_to_regain_space(puzzle_input_filename)}"
     )

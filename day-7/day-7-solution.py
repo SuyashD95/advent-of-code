@@ -1,20 +1,21 @@
 """
 Advent of Code 2022
 -------------------
-Day 7: No Space Left On Device (Part 1 Finished)
+Day 7: No Space Left On Device (Finished)
 
 Part 1 (Completed):
     Question: Find all of the directories with a total size of at most 100000. What is the sum of the
     total sizes of those directories?
     Answer: 1297159
 
-Part 2 (Pending):
+Part 2 (Completed):
     Question: Find the smallest directory that, if deleted, would free up enough space on the filesystem
     to run the update. What is the total size of that directory?
-    Answer:
+    Answer: 3866390
 -------------------
 
 Author: Suyash Dayal
+Originally Completed On: 20th September 2023
 """
 from __future__ import annotations
 
@@ -292,22 +293,31 @@ def smallest_directory_to_regain_space(puzzle_input_filename: str) -> int:
     Returns
     -------
     The total size of the smallest directory that, if deleted, would free up
-    enough space on the filesystem to run the update. In case, no such directory
-    exists, returns -1. And, if the filesystem is already large enough to run
-    the update, returns 0.
+    enough space on the filesystem to run the update. And, if the filesystem is
+    already large enough to run the update, returns 0.
     """
     MAX_FILESYSTEM_SIZE = 70_000_000
     MIN_SPACE_REQUIRED_TO_RUN_UPDATE = 30_000_000
+    DELETION_NOT_REQUIRED = 0
 
     file_parser = InputParser(puzzle_input_filename)
     fs_tree = file_parser.parse()
     calculate_directory_sizes(fs_tree)
 
-    available_space = MAX_FILESYSTEM_SIZE - fs_tree.size
-    if available_space >= MIN_SPACE_REQUIRED_TO_RUN_UPDATE:
-        return 0
+    AVAILABLE_SPACE = MAX_FILESYSTEM_SIZE - fs_tree.size
+    if AVAILABLE_SPACE >= MIN_SPACE_REQUIRED_TO_RUN_UPDATE:
+        return DELETION_NOT_REQUIRED
 
-    return -1
+    smallest_directory_size = None
+    traversal_queue = deque([fs_tree])
+    while front_traversal_node := traversal_queue.popleft() if traversal_queue else None:
+        if front_traversal_node.fs_type == FSType.DIRECTORY:
+            traversal_queue.extend(front_traversal_node.children)
+            if (AVAILABLE_SPACE + front_traversal_node.size) >= MIN_SPACE_REQUIRED_TO_RUN_UPDATE:
+                if (smallest_directory_size is None) or (front_traversal_node.size < smallest_directory_size):
+                    smallest_directory_size = front_traversal_node.size
+
+    return smallest_directory_size
 
 
 if __name__ == "__main__":

@@ -41,7 +41,7 @@ class FSElement:
     parent: FSElement | None = None
     is_explored: bool = False
 
-    def __str__(self):
+    def __str__(self) -> str:
         """A string representation for the instance."""
         if self.fs_type == FSType.FILE:
             return f"File: {self.name} ({self.size})"
@@ -254,10 +254,20 @@ def sum_of_directories_under_100k(puzzle_input_filename: str) -> int:
     -------
     The total size of all directories whose size is utmost 100K.
     """
+    MAX_DIR_SIZE = 100_000
     file_parser = InputParser(puzzle_input_filename)
     fs_tree = file_parser.parse()
     calculate_directory_sizes(fs_tree)
-    return 0
+
+    total_size_of_dirs_under_100k = 0
+    traversal_queue = deque([fs_tree])
+    while front_traversal_node := traversal_queue.popleft() if traversal_queue else None:
+        if front_traversal_node.fs_type == FSType.DIRECTORY:
+            traversal_queue.extend(front_traversal_node.children)
+            if front_traversal_node.size <= MAX_DIR_SIZE:
+                total_size_of_dirs_under_100k += front_traversal_node.size
+
+    return total_size_of_dirs_under_100k
 
 
 if __name__ == "__main__":

@@ -93,7 +93,15 @@ class TreeMap:
         ------
         ValueError: A position of a given tree is located on the edge of the map.
         """
-        pass
+        if self.is_tree_located_on_edge(tree_position):
+            raise ValueError("The given tree is located on the edge of the map.")
+
+        target_tree_height = self.trees[tree_position[1]][tree_position[0]]
+        for x_position in range(tree_position[0], self.width, -1):
+            current_tree_height = self.trees[tree_position[1]][x_position]
+            if current_tree_height >= target_tree_height:
+                return True
+        return False
 
     def is_tree_visible_from_southern_direction(self, tree_position: tuple[int, int]) -> bool:
         """Returns `True` if the tree located in the interior is visible from the

@@ -62,6 +62,10 @@ class TreeMap:
         Returns
         -------
         A boolean indicating whether a tree is visible from the northern edge or not.
+
+        Raises
+        ------
+        ValueError: A position of a given tree is located on the edge of the map.
         """
         pass
 
@@ -76,6 +80,10 @@ class TreeMap:
         Returns
         -------
         A boolean indicating whether a tree is visible from the eastern edge or not.
+
+        Raises
+        ------
+        ValueError: A position of a given tree is located on the edge of the map.
         """
         pass
 
@@ -90,6 +98,10 @@ class TreeMap:
         Returns
         -------
         A boolean indicating whether a tree is visible from the southern edge or not.
+
+        Raises
+        ------
+        ValueError: A position of a given tree is located on the edge of the map.
         """
         pass
 
@@ -104,6 +116,10 @@ class TreeMap:
         Returns
         -------
         A boolean indicating whether a tree is visible from the western edge or not.
+
+        Raises
+        ------
+        ValueError: A position of a given tree is located on the edge of the map.
         """
         pass
 

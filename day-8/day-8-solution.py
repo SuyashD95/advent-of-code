@@ -51,6 +51,62 @@ class TreeMap:
             or (tree_position[1] == 0) or (tree_position[1] == self.width - 1)
         )
 
+    def is_tree_visible_from_northern_direction(self, tree_position: tuple[int, int]) -> bool:
+        """Returns `True` if the tree located in the interior is visible from the
+        northern edge of the map; otherwise, it returns `False`.
+
+        Parameters
+        ----------
+        tree_position: A tuple containing X & Y location of a tree (0-based index).
+
+        Returns
+        -------
+        A boolean indicating whether a tree is visible from the northern edge or not.
+        """
+        pass
+
+    def is_tree_visible_from_eastern_direction(self, tree_position: tuple[int, int]) -> bool:
+        """Returns `True` if the tree located in the interior is visible from the
+        eastern edge of the map; otherwise, it returns `False`.
+
+        Parameters
+        ----------
+        tree_position: A tuple containing X & Y location of a tree (0-based index).
+
+        Returns
+        -------
+        A boolean indicating whether a tree is visible from the eastern edge or not.
+        """
+        pass
+
+    def is_tree_visible_from_southern_direction(self, tree_position: tuple[int, int]) -> bool:
+        """Returns `True` if the tree located in the interior is visible from the
+        southern edge of the map; otherwise, it returns `False`.
+
+        Parameters
+        ----------
+        tree_position: A tuple containing X & Y location of a tree (0-based index).
+
+        Returns
+        -------
+        A boolean indicating whether a tree is visible from the southern edge or not.
+        """
+        pass
+
+    def is_tree_visible_from_western_direction(self, tree_position: tuple[int, int]) -> bool:
+        """Returns `True` if the tree located in the interior is visible from the
+        western edge of the map; otherwise, it returns `False`.
+
+        Parameters
+        ----------
+        tree_position: A tuple containing X & Y location of a tree (0-based index).
+
+        Returns
+        -------
+        A boolean indicating whether a tree is visible from the western edge or not.
+        """
+        pass
+
 
 # Part 1 Solution
 # ---------------

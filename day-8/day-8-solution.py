@@ -34,6 +34,23 @@ class TreeMap:
         else:
             return (self.height * 2) + (self.width - 2) * 2)
 
+    def is_tree_on_the_edge(self, tree_position: tuple[int, int]) -> bool:
+        """Returns `True` if the tree is located on the edge of the map;
+        otherwise, it returns `False`.
+
+        Parameters
+        ----------
+        tree_position: A tuple containing X & Y location of a tree (0-based index).
+
+        Returns
+        -------
+        A boolean indicating whether a tree is located on the edge or not.
+        """
+        return (
+            (tree_position[0] == 0) or (tree_position[0] == self.height - 1)
+            or (tree_position[1] == 0) or (tree_position[1] == self.width - 1)
+        )
+
 
 # Part 1 Solution
 # ---------------

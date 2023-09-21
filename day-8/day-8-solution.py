@@ -16,11 +16,23 @@ from dataclasses import dataclass
 @dataclass
 class TreeMap:
     """This dataclass stores information about the different heights
-    of the trees in a given regiona and its associated metadata.
+    of the trees in a given regions and its associated metadata.
     """
     trees: list[list[int]]
     height: int = 0
     width: int = 0
+
+    @property
+    def no_of_trees_on_map_edges(self) -> int:
+        """Returns no. of trees that are present on the edges of the map."""
+        if self.height == 0:
+            return 0
+        elif self.height == 1:
+            return self.width
+        elif self.width == 1:
+            return self.height
+        else:
+            return (self.height * 2) + (self.width - 2) * 2)
 
 
 # Part 1 Solution
@@ -44,10 +56,8 @@ def find_visible_trees_count(puzzle_input_filename: str) -> int:
     tree_map = TreeMap(
         trees=tree_map_matrix,
         height=len(tree_map_matrix),
-        width=len(tree_map_matrix[0]) if len(tree_map_matrix) else 0 
+        width=len(tree_map_matrix[0]) if len(tree_map_matrix) else 0
     )
-    print(tree_map)
-
 
 
 if __name__ == "__main__":

@@ -159,6 +159,63 @@ class TreeMap:
                 return False
         return True
 
+    def measure_view_distance_in_northern_direction(self, tree_position: tuple[int, int]) -> int:
+        """Returns a positive integer representing the no. of units that are visible
+        in the northern direction, from the tree on the given position.
+
+        Parameters
+        ----------
+        tree_position: A tuple containing X & Y location of a tree (0-based index).
+
+        Returns
+        -------
+        An integer representing the units visible from the source tree.
+        """
+        pass
+
+    def measure_view_distance_in_eastern_direction(self, tree_position: tuple[int, int]) -> int:
+        """Returns a positive integer representing the no. of units that are visible
+        in the eastern direction, from the tree on the given position.
+
+        Parameters
+        ----------
+        tree_position: A tuple containing X & Y location of a tree (0-based index).
+
+        Returns
+        -------
+        An integer representing the units visible from the source tree.
+        """
+        pass
+
+    def measure_view_distance_in_southern_direction(self, tree_position: tuple[int, int]) -> int:
+        """Returns a positive integer representing the no. of units that are visible
+        in the southern direction, from the tree on the given position.
+
+        Parameters
+        ----------
+        tree_position: A tuple containing X & Y location of a tree (0-based index).
+
+        Returns
+        -------
+        An integer representing the units visible from the source tree.
+        """
+        pass
+
+    def measure_view_distance_in_western_direction(self, tree_position: tuple[int, int]) -> int:
+        """Returns a positive integer representing the no. of units that are visible
+        in the western direction, from the tree on the given position.
+
+        Parameters
+        ----------
+        tree_position: A tuple containing X & Y location of a tree (0-based index).
+
+        Returns
+        -------
+        An integer representing the units visible from the source tree.
+        """
+        pass
+
+
 
 # Part 1 Solution
 # ---------------
@@ -221,11 +278,14 @@ def find_highest_scenic_score(puzzle_input_filename: str) -> int:
             tree_row = [int(digit) for digit in output_line]
             tree_map_matrix.append(tree_row)
 
+    highest_scenic_score = 0
     tree_map = TreeMap(
         trees=tree_map_matrix,
         height=len(tree_map_matrix),
         width=len(tree_map_matrix[0]) if len(tree_map_matrix) else 0
     )
+
+    return highest_scenic_score
 
 
 if __name__ == "__main__":
@@ -233,4 +293,5 @@ if __name__ == "__main__":
     print(
         "Day 8 Answers:\n"
         f"  Part 1: {find_visible_trees_count(puzzle_input_filename)}"
+        f"  Part 2: {find_highest_scenic_score(puzzle_input_filename)}"
     )

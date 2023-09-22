@@ -6,6 +6,10 @@ Day 8: Treetop Tree House (Part 1 Finished)
 Part 1 (Completed):
     Question: How many trees are visible from outside the grid?
     Answer: 1818
+
+Part 2 (Pending):
+    Question: What is the highest scenic score possible for any tree?
+    Answer:
 -------------------
 
 Author: Suyash Dayal
@@ -194,6 +198,34 @@ def find_visible_trees_count(puzzle_input_filename: str) -> int:
             ):
                 total_no_of_visible_trees += 1
     return total_no_of_visible_trees
+
+
+# Part 2 Solution
+# ---------------
+def find_highest_scenic_score(puzzle_input_filename: str) -> int:
+    """Returns the highest scenic score that is possible for a tree in
+    the given input.
+
+    Parameters
+    ----------
+    puzzle_input_filename: Name of text file containing input dataset.
+
+    Returns
+    -------
+    A positive integer representing the highest scenic score achieved by
+    the tree.
+    """
+    tree_map_matrix = []
+    with open(puzzle_input_filename) as puzzle_file:
+        while output_line := puzzle_file.readline()[:-1]:
+            tree_row = [int(digit) for digit in output_line]
+            tree_map_matrix.append(tree_row)
+
+    tree_map = TreeMap(
+        trees=tree_map_matrix,
+        height=len(tree_map_matrix),
+        width=len(tree_map_matrix[0]) if len(tree_map_matrix) else 0
+    )
 
 
 if __name__ == "__main__":

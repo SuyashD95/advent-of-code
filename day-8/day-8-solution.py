@@ -235,8 +235,14 @@ class TreeMap:
         -------
         An integer representing the units visible from the source tree.
         """
-        pass
-
+        source_tree_height = self.trees[tree_position[1]][tree_position[0]]
+        trees_visible_from_source_tree = 0
+        for x_direction in range(tree_position[0] - 1, -1, -1):
+            target_tree_height = self.trees[tree_position[1][x_direction]
+            trees_visible_from_source_tree += 1
+            if source_tree_height <= target_tree_height:
+                break
+        return trees_visible_from_source_tree
 
 
 # Part 1 Solution

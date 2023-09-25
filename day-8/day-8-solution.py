@@ -181,7 +181,6 @@ class TreeMap:
                 break
         return trees_visible_from_source_tree
 
-
     def measure_view_distance_in_eastern_direction(self, tree_position: tuple[int, int]) -> int:
         """Returns a positive integer representing the no. of units that are visible
         in the eastern direction, from the tree on the given position.
@@ -215,7 +214,14 @@ class TreeMap:
         -------
         An integer representing the units visible from the source tree.
         """
-        pass
+        source_tree_height = self.trees[tree_position[1]][tree_position[0]]
+        trees_visible_from_source_tree = 0
+        for y_direction in range(tree_position[1] + 1, self.height):
+            target_tree_height = self.trees[y_direction][tree_position[0]]
+            trees_visible_from_source_tree += 1
+            if source_tree_height <= target_tree_height:
+                break
+        return trees_visible_from_source_tree
 
     def measure_view_distance_in_western_direction(self, tree_position: tuple[int, int]) -> int:
         """Returns a positive integer representing the no. of units that are visible

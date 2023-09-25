@@ -312,7 +312,20 @@ def find_highest_scenic_score(puzzle_input_filename: str) -> int:
         height=len(tree_map_matrix),
         width=len(tree_map_matrix[0]) if len(tree_map_matrix) else 0
     )
-
+    for y_position, tree_row in enumerate(tree_map.trees):
+        for x_position, _ in enumerate(tree_row):
+            tree_position = (x_position, y_position)
+            if tree_map.is_tree_located_on_the_edge(tree_position):
+                scenic_score = 0
+            else:
+                scenic_score = (
+                    tree_map.measure_view_distance_in_northern_direction(tree_position)
+                    * tree_map.measure_view_distance_in_eastern_direction(tree_position)
+                    * tree_map.measure_view_distance_in_southern_direction(tree_position)
+                    * tree_map.measure_view_distance_in_western_direction(tree_position)
+                )
+            if scenic_score > highest_scenic_score:
+                highest_scenic_score = scenic_score
     return highest_scenic_score
 
 

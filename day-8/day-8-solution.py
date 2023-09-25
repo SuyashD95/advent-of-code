@@ -1,18 +1,19 @@
 """
 Advent of Code 2022
 -------------------
-Day 8: Treetop Tree House (Part 1 Finished)
+Day 8: Treetop Tree House (Finished)
 
 Part 1 (Completed):
     Question: How many trees are visible from outside the grid?
     Answer: 1818
 
-Part 2 (Pending):
+Part 2 (Completed):
     Question: What is the highest scenic score possible for any tree?
-    Answer:
+    Answer: 368368
 -------------------
 
 Author: Suyash Dayal
+Originally Completed On: 25th September 2023
 """
 from dataclasses import dataclass
 
@@ -196,7 +197,7 @@ class TreeMap:
         source_tree_height = self.trees[tree_position[1]][tree_position[0]]
         trees_visible_from_source_tree = 0
         for x_direction in range(tree_position[0] + 1, self.width):
-            target_tree_height = self.trees[tree_position[1][x_direction]
+            target_tree_height = self.trees[tree_position[1]][x_direction]
             trees_visible_from_source_tree += 1
             if source_tree_height <= target_tree_height:
                 break
@@ -238,7 +239,7 @@ class TreeMap:
         source_tree_height = self.trees[tree_position[1]][tree_position[0]]
         trees_visible_from_source_tree = 0
         for x_direction in range(tree_position[0] - 1, -1, -1):
-            target_tree_height = self.trees[tree_position[1][x_direction]
+            target_tree_height = self.trees[tree_position[1]][x_direction]
             trees_visible_from_source_tree += 1
             if source_tree_height <= target_tree_height:
                 break
@@ -333,6 +334,6 @@ if __name__ == "__main__":
     puzzle_input_filename = "day-8-input.txt"
     print(
         "Day 8 Answers:\n"
-        f"  Part 1: {find_visible_trees_count(puzzle_input_filename)}"
+        f"  Part 1: {find_visible_trees_count(puzzle_input_filename)}\n"
         f"  Part 2: {find_highest_scenic_score(puzzle_input_filename)}"
     )

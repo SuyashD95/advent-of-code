@@ -20,3 +20,5 @@ Thank you [@Eric Wastl](https://adventofcode.com/about) for designing and sharin
 **Day 7: Day 7: No Space Left On Device** [[Puzzle](https://adventofcode.com/2022/day/7)] [[Input File](/day-7/day-7-input.txt)] [[Solution](/day-7/day-7-solution.py)]
 
 **Day 8: Treetop Tree Hourse** [[Puzzle](https://adventofcode.com/2022/day/8)] [[Input File](/day-8/day-8-input.txt)] [[Solution](/day-8/day-8-solution.py)]
+
+**Day 9: Rope Bridge** [[Puzzle](https://adventofcode.com/2022/day/9)] [[Input File](/day-9/day-9-input.txt)] [[Solution](/day-9/day-9-solution.py)]

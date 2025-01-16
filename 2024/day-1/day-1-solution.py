@@ -32,7 +32,7 @@ def find_total_distance(puzzle_input_filename: str) -> int:
     """
     hist_list_1 = []
     hist_list_2 = []
-    with open(puzzle_input_filename) as puzzle_file:
+    with open(puzzle_input_filename, encoding="utf-8") as puzzle_file:
         while line := puzzle_file.readline()[:-1]:
             fst_loc_id, snd_loc_id = [int(loc_id) for loc_id in line.split("   ")]
             hist_list_1.append(fst_loc_id)
@@ -59,7 +59,7 @@ def find_similarity_score(puzzle_input_filename: str) -> int:
     """
     hist_list_1 = []
     hist_list_2 = []
-    with open(puzzle_input_filename) as puzzle_file:
+    with open(puzzle_input_filename, encoding="utf-8") as puzzle_file:
         while line := puzzle_file.readline()[:-1]:
             fst_loc_id, snd_loc_id = [int(loc_id) for loc_id in line.split("   ")]
             hist_list_1.append(fst_loc_id)
@@ -74,10 +74,10 @@ def find_similarity_score(puzzle_input_filename: str) -> int:
 
 
 if __name__ == "__main__":
-    puzzle_input_filename = "day-1-input.txt"
+    PUZZLE_INPUT_FILENAME = "day-1-input.txt"
     print(
         "Day 1 Answers:\n"
-        f"  Part 1: {find_total_distance(puzzle_input_filename)}\n"
-        f"  Part 2: {find_similarity_score(puzzle_input_filename)}"
+        f"  Part 1: {find_total_distance(PUZZLE_INPUT_FILENAME)}\n"
+        f"  Part 2: {find_similarity_score(PUZZLE_INPUT_FILENAME)}"
     )
 

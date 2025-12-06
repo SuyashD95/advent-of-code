@@ -116,7 +116,8 @@ def does_num_ranges_overlap(
     return False
 
 
-def count_overlapping_ranges(puzzle_input_filename: str) -> int:
+def count_overlapping_ranges(
+        puzzle_input_filename    :str) -> int:
     """Returns the count of pairs where the two given number ranges overlap
     with one another i.e., some of the numbers between the two ranges are
     the same.

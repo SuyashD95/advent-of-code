@@ -8,8 +8,8 @@ import (
 )
 
 type Rotation struct {
-	direction string
-	steps     int
+	Direction string
+	Steps     int
 }
 
 /* Returns a new `Rotation` based on the string given in the "<direction><steps>" format. */

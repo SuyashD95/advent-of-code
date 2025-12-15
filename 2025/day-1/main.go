@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"suyashd95/aoc/2025/internal"
+	"suyashd95/aoc/2025/solution"
 )
 
 /* Returns a slice containing rotations that has to be processed to get the answer. */
@@ -31,5 +32,8 @@ func getRotationsFromInput(absPath string) []internal.Rotation {
 
 func main() {
 	rotationSeq := getRotationsFromInput("input.txt")
-	fmt.Println(rotationSeq)
+	fmt.Printf(
+		"Day 1: Secret Entrance\n\t1st Puzzle: %v\n\t2nd Puzzle: Pending\n",
+		solution.SolveFirstPuzzle(rotationSeq),
+	)
 }

@@ -1,0 +1,51 @@
+# Python Specific File/Folders
+# ----------------------------
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyd
+*.pyo
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+dist/
+eggs/
+*.egg
+*.egg-info/
+
+# Tests
+.pytest_cache/
+
+# Go Specific Files/Folders
+# -------------------------
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool
+*.out
+
+# General/Miscellaneous
+# ---------------------
+# Log files and directories
+logs/
+*.log
+
+# Environment variables file
+.env
+venv/
+env/
+
+# Editor specific files/folders
+.vscode
+.idea/

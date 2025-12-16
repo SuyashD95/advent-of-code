@@ -33,7 +33,8 @@ func getRotationsFromInput(absPath string) []internal.Rotation {
 func main() {
 	rotationSeq := getRotationsFromInput("input.txt")
 	fmt.Printf(
-		"Day 1: Secret Entrance\n\t1st Puzzle: %v\n\t2nd Puzzle: Pending\n",
+		"Day 1: Secret Entrance\n\tPart 1: %v\n\tPart 2: %v\n",
 		solution.SolveFirstPuzzle(rotationSeq),
+		solution.SolveSecondPuzzle(rotationSeq),
 	)
 }

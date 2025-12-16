@@ -35,7 +35,7 @@ func MakeRotation(rotation string) (*Rotation, error) {
 		return nil, fmt.Errorf("`Rotation.steps` ('%d') must be integer greater than 0", steps)
 	}
 	return &Rotation{
-		direction: direction,
-		steps:     steps,
+		Direction: direction,
+		Steps:     steps,
 	}, nil
 }

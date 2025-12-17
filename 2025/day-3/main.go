@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"suyashd95/aoc/2025/internal"
 	"suyashd95/aoc/2025/solution"
 )
 
@@ -28,6 +29,6 @@ func main() {
 	batteryBanks := getBatteryBanks("datasets/sample1.txt")
 	fmt.Printf(
 		"Day 3: Lobby\n\tPart 1: %v\n\tPart 2: Pending\n",
-		solution.SolveFirstPuzzle(batteryBanks),
+		solution.SolveFirstPuzzle(internal.BanksToOutputArrays(batteryBanks)),
 	)
 }

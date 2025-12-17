@@ -6,6 +6,7 @@ import (
 	"os"
 	"strings"
 	"suyashd95/aoc/2025/internal"
+	"suyashd95/aoc/2025/solution"
 )
 
 /* Returns range of product IDs from the input file  */
@@ -23,7 +24,9 @@ func extractIDRanges(absPath string) []internal.IDRange {
 }
 
 func main() {
-	idRanges := extractIDRanges("datasets/sample1.txt")
-	fmt.Println(idRanges)
-	fmt.Printf("Day 2: Gift Shop\n\tPart 1: Pending\n\tPart 2: Pending\n")
+	idRanges := extractIDRanges("datasets/input.txt")
+	fmt.Printf(
+		"Day 2: Gift Shop\n\tPart 1: %d\n\tPart 2: Pending\n",
+		solution.SolveFirstPuzzle(idRanges),
+	)
 }

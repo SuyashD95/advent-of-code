@@ -26,7 +26,8 @@ func extractIDRanges(absPath string) []internal.IDRange {
 func main() {
 	idRanges := extractIDRanges("datasets/input.txt")
 	fmt.Printf(
-		"Day 2: Gift Shop\n\tPart 1: %d\n\tPart 2: Pending\n",
+		"Day 2: Gift Shop\n\tPart 1: %d\n\tPart 2: %d\n",
 		solution.SolveFirstPuzzle(idRanges),
+		solution.SolveSecondPuzzle(idRanges),
 	)
 }

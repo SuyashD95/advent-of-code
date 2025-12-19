@@ -43,6 +43,15 @@ func (bb *BatteryBank) Append(joltage int) {
 	}
 }
 
+/* Returns no. of batteries turned on in the bank */
+func (bb BatteryBank) Count() int {
+	var count int
+	for node := bb.Head; node != nil; node = node.Next {
+		count++
+	}
+	return count
+}
+
 /* Returns the total output that is produced by the sequence of
  * batteries in the bank.
  */

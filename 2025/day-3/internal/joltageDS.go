@@ -30,7 +30,7 @@ func NewBatteryList(joltage int) *BatteryBank {
 	}
 }
 
-func (bb *BatteryBank) Add(joltage int) {
+func (bb *BatteryBank) Append(joltage int) {
 	var parentNode *Battery
 	for node := bb.Head; node != nil; node = node.Next {
 		parentNode = node

@@ -43,6 +43,24 @@ func (bb *BatteryBank) Append(joltage int) {
 	}
 }
 
+/* Removes the last element of the battery sequence */
+func (bb *BatteryBank) Remove() {
+	if bb.Head == nil {
+		return
+	}
+	var parentNode *Battery
+	lastNode := bb.Head
+	for node := bb.Head.Next; node != nil; node = node.Next {
+		parentNode = lastNode
+		lastNode = node
+	}
+	if lastNode == bb.Head {
+		bb.Head = nil
+	} else {
+		parentNode.Next = nil
+	}
+}
+
 /* Returns no. of batteries turned on in the bank */
 func (bb BatteryBank) Count() int {
 	var count int

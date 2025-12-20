@@ -26,7 +26,7 @@ func getBatteryBanks(absPath string) []string {
 }
 
 func main() {
-	batteryBanks := getBatteryBanks("datasets/input.txt")
+	batteryBanks := getBatteryBanks("datasets/sample1-mini.txt")
 	fmt.Printf(
 		"Day 3: Lobby\n\tPart 1: %v\n\tPart 2: %v\n",
 		solution.SolveFirstPuzzle(internal.BanksToOutputArrays(batteryBanks)),

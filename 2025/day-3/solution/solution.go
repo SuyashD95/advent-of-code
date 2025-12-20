@@ -59,6 +59,7 @@ func getBankMaxJoltage(batSeq *internal.BatteryBank, startPos int, bankArr []int
 		fmt.Printf("getBankMaxJoltage [After adding %d present at %d index]: %s\n", bankArr[currentPos], currentPos, batSeq.ToString())
 		seqJolts := getBankMaxJoltage(batSeq, currentPos+1, bankArr)
 		fmt.Printf("getBankMaxJoltage [Sequence Jolts]: %d\n", seqJolts)
+		batSeq.Remove()
 		fmt.Printf("getBankMaxJoltage [After removing %d present at %d index]: %s\n", bankArr[currentPos], currentPos, batSeq.ToString())
 		if seqJolts > maxJolts {
 			maxJolts = seqJolts

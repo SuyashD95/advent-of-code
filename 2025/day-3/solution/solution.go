@@ -39,7 +39,20 @@ func SolveFirstPuzzle(batteryBanks [][]int) int {
 	return totalOutputJoltage
 }
 
-func getBankMaxJoltage(bankList *internal.BatteryBank, startPos int, bankArr []int) int64 {
+/* Returns the max joltage from the sequence of batteries which starts from the given position. */
+func getBankMaxJoltage(batSeq *internal.BatteryBank, startPos int, bankArr []int) int64 {
+	if batSeq.Count() > internal.MAX_BATTERIES_IN_PACK || startPos >= len(bankArr) {
+		return batSeq.CalculateOutput()
+	}
+	var maxJolts int64
+	for currentPos := startPos; currentPos < len(bankArr); currentPos++ {
+		batSeq.Append(bankArr[currentPos])
+		seqJolts := getBankMaxJoltage(batSeq, currentPos+1, bankArr)
+		if seqJolts > maxJolts {
+			maxJolts = seqJolts
+		}
+	}
+	return maxJolts
 }
 
 /* This function returns the maximum output joltage which the sum of
@@ -47,11 +60,20 @@ func getBankMaxJoltage(bankList *internal.BatteryBank, startPos int, bankArr []i
  */
 func SolveSecondPuzzle(batteryBanks [][]int) int64 {
 	var totalOutputJoltage int64
-	const INITIAL_POSITION = 0
 	for _, batteries := range batteryBanks {
-		bank := internal.NewBatteryList(batteries[INITIAL_POSITION])
-		maxOut := getBankMaxJoltage(bank, INITIAL_POSITION+1, batteries)
-		totalOutputJoltage += maxOut
+		var bankMax int64
+		maxInitialPosition := len(batteries) - internal.MAX_BATTERIES_IN_PACK
+		for initialPosition := range batteries {
+			if initialPosition > maxInitialPosition {
+				break
+			}
+			batterySeq := internal.NewBatteryList(batteries[initialPosition])
+			localMax := getBankMaxJoltage(batterySeq, initialPosition+1, batteries)
+			if localMax > bankMax {
+				bankMax = localMax
+			}
+		}
+		totalOutputJoltage += bankMax
 	}
 	return totalOutputJoltage
 }

@@ -89,12 +89,14 @@ func (bb BatteryBank) ToString() string {
 	if _, err := builder.WriteString("H -> "); err != nil {
 		log.Fatalf("Unable to write head string into builder: %v", err)
 	}
+	var count int
 	for node := bb.Head; node != nil; node = node.Next {
 		if _, err := builder.WriteString(fmt.Sprintf("%s -> ", node.ToString())); err != nil {
 			log.Fatalf("Unable to append battery string into builder: %v", err)
 		}
+		count++
 	}
-	if _, err := builder.WriteString("X\n"); err != nil {
+	if _, err := builder.WriteString(fmt.Sprintf("X (total: %d\n", count)); err != nil {
 		log.Fatalf("Unable to write EOL string into builder: %v", err)
 	}
 	return builder.String()

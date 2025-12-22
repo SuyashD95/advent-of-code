@@ -43,8 +43,17 @@ func SolveFirstPuzzle(batteryBanks [][]int) int {
 }
 
 /* Returns the max joltage from the sequence of batteries which starts from the given position. */
-func getBankMaxJoltage(batSeq *internal.BatteryBank, startPos int, bankArr []int, globalMax int64) int64 {
+func getBankMaxJoltage(batSeq *internal.BatteryBank, startPos int, bankArr []int, globalMax int64, resultStore map[string]int64) int64 {
 	// fmt.Printf("getBankMaxJoltage [Beginning]: %s, %d, %v, %d\n", batSeq.ToString(), startPos, bankArr, globalMax)
+	seqSummary := batSeq.ToString()
+	if output, ok := resultStore[seqSummary]; ok {
+		fmt.Printf("Retrieving output from cache: %#s = %d\n", seqSummary output)
+		if output > globalMax {
+			fmt.Println("Global max has been changed...")
+			globalMax = output
+		}
+		return output
+	}
 	if batSeq.Count() >= internal.MAX_BATTERIES_IN_PACK {
 		// fmt.Printf("getBankMaxJoltage [Max Count Reached]: %d\n", batSeq.Count())
 		return batSeq.CalculateOutput()
@@ -76,6 +85,7 @@ func getBankMaxJoltage(batSeq *internal.BatteryBank, startPos int, bankArr []int
  */
 func SolveSecondPuzzle(batteryBanks [][]int) int64 {
 	var totalOutputJoltage int64
+	outputCache := make(map[string]int64)
 	for index, batteries := range batteryBanks {
 		fmt.Printf("Output of %d: %v = ", index, batteries)
 		maxInitialPosition := len(batteries) - internal.MAX_BATTERIES_IN_PACK

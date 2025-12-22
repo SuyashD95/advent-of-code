@@ -102,3 +102,17 @@ func (bb BatteryBank) ToString() string {
 	}
 	return builder.String()
 }
+
+/* Prints the number made using given sequence of batteries */
+func (bb BatteryBank) ToRawString() string {
+	var builder strings.Builder
+	for node := bb.Head; node != nil; node = node.Next {
+		if _, err := builder.WriteString(fmt.Sprintf("%s", node.ToString())); err != nil {
+			log.Fatalf("Unable to append battery string into builder: %v", err)
+		}
+	}
+	if _, err := builder.WriteString("\n"); err != nil {
+		log.Fatalf("Unable to write EOL string into builder: %v", err)
+	}
+	return builder.String()
+}

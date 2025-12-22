@@ -74,11 +74,12 @@ func (bb BatteryBank) Count() int {
  * batteries in the bank.
  */
 func (bb BatteryBank) CalculateOutput() int64 {
+	batteriesInPack := bb.Count()
 	var totalOutput int64
 	var currentDepth int
 	for node := bb.Head; node != nil; node = node.Next {
 		currentDepth += 1
-		totalOutput += int64(node.Joltage) * int64(math.Pow10(MAX_BATTERIES_IN_PACK-currentDepth))
+		totalOutput += int64(node.Joltage) * int64(math.Pow10(batteriesInPack-currentDepth))
 	}
 	return totalOutput
 }
@@ -96,7 +97,7 @@ func (bb BatteryBank) ToString() string {
 		}
 		count++
 	}
-	if _, err := builder.WriteString(fmt.Sprintf("X (total: %d\n", count)); err != nil {
+	if _, err := builder.WriteString(fmt.Sprintf("X (total: %d)\n", count)); err != nil {
 		log.Fatalf("Unable to write EOL string into builder: %v", err)
 	}
 	return builder.String()
